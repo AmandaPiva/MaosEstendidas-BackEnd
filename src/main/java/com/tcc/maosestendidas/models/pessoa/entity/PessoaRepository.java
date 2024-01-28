@@ -1,4 +1,4 @@
-package com.tcc.maosestendidas.models;
+package com.tcc.maosestendidas.models.pessoa.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +11,6 @@ public interface PessoaRepository extends JpaRepository<Pessoa, String> {
     Optional<Pessoa> findByNomePessoa(String nomePessoa);
 
     Optional<Pessoa> findByEmailPessoa(String emailPessoa);
+
+    Optional<Pessoa> findByCpfPessoa(String cpfPessoa);
 }
