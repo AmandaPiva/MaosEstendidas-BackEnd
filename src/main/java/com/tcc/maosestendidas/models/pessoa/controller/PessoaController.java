@@ -16,6 +16,8 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
+
+
     @GetMapping
     public ResponseEntity<?> listaPessoas(){
         return new ResponseEntity<List<Pessoa>>(pessoaService.listaPessoas(), HttpStatus.OK);

@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +55,10 @@ public class PessoaServiceImpl implements PessoaService{
         pessoa.setEmailPessoa(dto.getEmailPessoa());
         pessoa.setCpfPessoa(dto.getCpfPessoa());
 
+
+
+
+        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
         return pessoa;
     }
 
@@ -66,7 +72,7 @@ public class PessoaServiceImpl implements PessoaService{
         updatePessoa.setCpfPessoa(dto.getCpfPessoa());
         updatePessoa.setEmailPessoa(dto.getEmailPessoa());
         updatePessoa.setNomePessoa(dto.getNomePessoa());
-
+        updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
 
         return null;
     }

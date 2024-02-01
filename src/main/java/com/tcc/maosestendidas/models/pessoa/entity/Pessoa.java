@@ -1,11 +1,14 @@
 package com.tcc.maosestendidas.models.pessoa.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,8 +23,6 @@ public class Pessoa {
 
     private String cpfPessoa;
 
-    private Date dataNascimentoPessoa;
-
-
-
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate dataNascimentoPessoa;
 }
