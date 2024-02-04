@@ -1,10 +1,9 @@
 package com.tcc.maosestendidas.models.pessoa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.Set;
 
 @Entity
 @Data
@@ -15,5 +14,6 @@ public class PessoaRole {
 
     private String rolePessoa;
 
-
+    @OneToMany
+    private Set<Pessoa> pessoas;
 }

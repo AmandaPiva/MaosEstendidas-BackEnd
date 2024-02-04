@@ -5,6 +5,10 @@ import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -76,4 +80,25 @@ public class PessoaServiceImpl implements PessoaService{
 
         return null;
     }
+
+    //CRIPTOGRAFIA DE SENHAS
+    @Override
+    public Boolean comparaSenhas(String senhaCriptografada, String senha) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder.matches(senha, senhaCriptografada);
+    }
+
+    //MÉTODO PARA LOGAR DE ACORDO COM O EMAIL PASSADO PELO USUÁRIO
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String email)  {
+                return pessoaRepository.findByEmailPessoa(email)
+                        .orElseThrow(() -> new RuntimeException("Usuário não econtrado"));
+            }
+        };
+    }
+
+
 }
