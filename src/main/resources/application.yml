@@ -12,4 +12,4 @@ spring:
     driverClassName: org.postgresql.Driver
   token:
     signing:
-      key:
+      key: 7613a3b1b805286f5b0cc3d491123e00b711ef48d600430c35e6e06d8a9f076a

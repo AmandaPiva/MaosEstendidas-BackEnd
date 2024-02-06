@@ -4,12 +4,17 @@ import com.tcc.maosestendidas.JWT.DTO.JwtAuthResponseDTO;
 import com.tcc.maosestendidas.JWT.Service.JwtService;
 import com.tcc.maosestendidas.models.pessoa.DTO.PessoaLoginDTO;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+@Service
+@RequiredArgsConstructor
 public class AutenticacaoServiceImpl implements AutenticacaoService{
     @Autowired
     private JwtService jwtService;
@@ -34,9 +39,14 @@ public class AutenticacaoServiceImpl implements AutenticacaoService{
         claims.put("role", user.getRolePessoa().getRolePessoa() );
         claims.put("email", user.getEmailPessoa());
 
+        var jwt = jwtService.generateToken(claims, user);
 
+        JwtAuthResponseDTO resposta = new JwtAuthResponseDTO();
 
-        )
-        return null;
+        resposta.setToken(jwt);
+        resposta.setEmail(user.getEmailPessoa());
+        resposta.setRole(user.getRolePessoa().getRolePessoa());
+
+        return resposta;
     }
 }
