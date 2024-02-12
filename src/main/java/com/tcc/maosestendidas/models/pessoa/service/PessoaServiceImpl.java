@@ -3,6 +3,8 @@ package com.tcc.maosestendidas.models.pessoa.service;
 import com.tcc.maosestendidas.models.pessoa.DTO.PessoaDTO;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
+import com.tcc.maosestendidas.models.pessoa.entity.PessoaRole;
+import com.tcc.maosestendidas.models.pessoa.entity.PessoaRoleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +24,9 @@ public class PessoaServiceImpl implements PessoaService{
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private PessoaRoleRepository pessoaRoleRepository;
+
     @Override
     public List<Pessoa> listaPessoas() {
         return pessoaRepository.findAll();
@@ -33,6 +38,11 @@ public class PessoaServiceImpl implements PessoaService{
         if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
 
         return pessoa.get();
+    }
+
+    @Override
+    public Optional<Pessoa> buscaPessoaPeloEmailOptional(String email) {
+        return pessoaRepository.findByEmailPessoa(email);
     }
 
     @Override
@@ -52,16 +62,22 @@ public class PessoaServiceImpl implements PessoaService{
         return pessoa;
     }
 
+    @Override
+    @Transactional
+    public Pessoa criaPessoa(Pessoa pessoa) {
+        pessoaRepository.save(pessoa);
+        return pessoa;
+    }
+
     private Pessoa converteDtoParaPessoa(PessoaDTO dto){
         Pessoa pessoa = new Pessoa();
+
+        Optional<PessoaRole> pessoaRole = pessoaRoleRepository.findById(dto.getRolePessoa());
 
         pessoa.setNomePessoa(dto.getNomePessoa());
         pessoa.setEmailPessoa(dto.getEmailPessoa());
         pessoa.setCpfPessoa(dto.getCpfPessoa());
-
-
-
-
+        pessoa.setRolePessoa(pessoaRole.get());
         pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
         return pessoa;
     }

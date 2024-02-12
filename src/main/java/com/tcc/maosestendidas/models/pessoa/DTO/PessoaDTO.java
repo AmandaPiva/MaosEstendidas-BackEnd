@@ -1,5 +1,6 @@
 package com.tcc.maosestendidas.models.pessoa.DTO;
 
+import com.tcc.maosestendidas.models.pessoa.entity.PessoaRole;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -10,6 +11,9 @@ public class PessoaDTO {
     private String nomePessoa;
     private String emailPessoa;
     private String cpfPessoa;
+
+    private String rolePessoa;
+
     private LocalDate dataNascimentoPessoa;
 
 }

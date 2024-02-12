@@ -9,6 +9,7 @@ import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,10 +20,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+
 @Service
 public class JwtServiceImpl implements JwtService {
 
-    @Value("${token.signing.key}")
+    //DEVE SER IDENTICA A FORMA QUE ESTA NO ARQUIVO application.yml
+    @Value("${  token:\n" +
+            "    signing:\n" +
+            "      key}")
     private String jwtSigningKey;
 
     @Override
