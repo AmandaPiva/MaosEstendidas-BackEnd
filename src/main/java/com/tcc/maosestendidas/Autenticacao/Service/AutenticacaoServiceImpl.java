@@ -29,8 +29,8 @@ public class AutenticacaoServiceImpl implements AutenticacaoService{
     @Override
     public JwtAuthResponseDTO assina(PessoaLoginDTO dto) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getSenha()));
-                var user = pessoaRepository.findByEmailPessoa(dto.getEmail()).orElseThrow(
+                new UsernamePasswordAuthenticationToken(dto.getEmailPessoa(), dto.getSenhaPessoa()));
+                var user = pessoaRepository.findByEmailPessoa(dto.getEmailPessoa()).orElseThrow(
                         ()-> new RuntimeException("Email ou senha inválidos"));
 
         HashMap<String, String> claims = new HashMap<String, String>();

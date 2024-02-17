@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class PessoaLoginDTO {
-    private String email;
-    private String senha;
+    private String emailPessoa;
+    private String senhaPessoa;
     
 }
