@@ -36,7 +36,7 @@ public class AutenticacaoServiceImpl implements AutenticacaoService{
         HashMap<String, String> claims = new HashMap<String, String>();
 
         //aplicando essas regras no servço
-        claims.put("role", user.getRolePessoa().getRolePessoa() );
+        //claims.put("role", user.getRolePessoa().getRolePessoa() );
         claims.put("email", user.getEmailPessoa());
 
         var jwt = jwtService.generateToken(claims, user);

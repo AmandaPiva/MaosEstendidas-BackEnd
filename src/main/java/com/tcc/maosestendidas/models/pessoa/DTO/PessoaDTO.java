@@ -11,6 +11,7 @@ public class PessoaDTO {
     private String nomePessoa;
     private String emailPessoa;
     private String cpfPessoa;
+    private String senhaPessoa;
 
     private String rolePessoa;
 

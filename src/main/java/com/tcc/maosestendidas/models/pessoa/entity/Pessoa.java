@@ -24,6 +24,8 @@ public class Pessoa implements UserDetails {
     private String nomePessoa;
     private String emailPessoa;
 
+    private String senhaPessoa;
+
     private String cpfPessoa;
 
     @DateTimeFormat(pattern = "dd-MM-yyyy")

@@ -65,6 +65,8 @@ public class PessoaLoginController {
             }
             pessoa.setNomePessoa("MaosEstendidas");
             pessoa.setEmailPessoa("maosestendidas@teste.com.br");
+            pessoa.setSenhaPessoa(geraSenhaHash());
+            pessoaService.criaPessoa(pessoa);
 
         }else{
             log.info("Usuário admin já existe!");

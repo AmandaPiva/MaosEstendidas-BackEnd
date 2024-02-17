@@ -25,9 +25,7 @@ import java.util.function.Function;
 public class JwtServiceImpl implements JwtService {
 
     //DEVE SER IDENTICA A FORMA QUE ESTA NO ARQUIVO application.yml
-    @Value("${  token:\n" +
-            "    signing:\n" +
-            "      key}")
+    @Value("${token.signing.key}")
     private String jwtSigningKey;
 
     @Override
@@ -77,7 +75,7 @@ public class JwtServiceImpl implements JwtService {
     //um parse de tokens e depois obter as reinivindicações do corpo deles
     @Override
     public Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
+        return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
                 .getBody();
     }
 
