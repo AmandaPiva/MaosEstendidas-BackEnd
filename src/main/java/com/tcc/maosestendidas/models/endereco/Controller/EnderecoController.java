@@ -29,7 +29,7 @@ public class EnderecoController {
         return new ResponseEntity<Endereco>(enderecoService.buscaEnderecoPeloLogradouro(logradouro), HttpStatus.OK);
     }
 
-    @GetMapping("/buscaPeloLogradouro/{cep}")
+    @GetMapping("/buscaPeloCep/{cep}")
     public ResponseEntity<?> buscaEnderecoPeloCep(@PathVariable("cep") String cep){
         return new ResponseEntity<Endereco>(enderecoService.buscaEnderecoPeloCep(cep), HttpStatus.OK);
     }
@@ -44,10 +44,11 @@ public class EnderecoController {
         return new ResponseEntity<Endereco>(enderecoService.listarEnderecosPelaCidade(cidade), HttpStatus.OK);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     public ResponseEntity<?> criaEndereco(@RequestBody EnderecoDTO dto){
         return new ResponseEntity<Endereco>(enderecoService.cadastrarEnderecoManual(dto), HttpStatus.CREATED);
     }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateEndereco(@RequestBody EnderecoDTO dto, @PathVariable("id") String id) {

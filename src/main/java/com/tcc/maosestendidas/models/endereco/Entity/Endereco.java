@@ -11,7 +11,7 @@ import lombok.Data;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String idPessoa;
+    private String idEndereco;
 
     private String logradouro;
     private String bairro;
