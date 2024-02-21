@@ -20,7 +20,6 @@ public interface EnderecoService {
 
 
 
-
     Endereco cadastrarEnderecoManual(EnderecoDTO dto);
 
     Endereco updateEndereco(EnderecoDTO dto, String idEndereco);

@@ -1,6 +1,6 @@
 package com.tcc.maosestendidas.models.pessoa.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.tcc.maosestendidas.models.doacoes.entity.Doacoes;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,12 +28,15 @@ public class Pessoa implements UserDetails {
 
     private String cpfPessoa;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate dataNascimentoPessoa;
+//    @DateTimeFormat(pattern = "dd-MM-yyyy")
+//    private LocalDate dataNascimentoPessoa;
 
     @ManyToOne
     @JoinColumn(name = "idPessoaRole")
     private PessoaRole rolePessoa;
+
+    @OneToMany
+    private Set<Doacoes> doacoes;
 
     //MÉTODOS QUE VEM DA CLASSE USERDETAILS
     @Override

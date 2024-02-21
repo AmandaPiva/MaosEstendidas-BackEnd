@@ -78,7 +78,7 @@ public class PessoaServiceImpl implements PessoaService{
         pessoa.setEmailPessoa(dto.getEmailPessoa());
         pessoa.setCpfPessoa(dto.getCpfPessoa());
         pessoa.setRolePessoa(pessoaRole.get());
-        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
+//        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
         return pessoa;
     }
 
@@ -92,7 +92,7 @@ public class PessoaServiceImpl implements PessoaService{
         updatePessoa.setCpfPessoa(dto.getCpfPessoa());
         updatePessoa.setEmailPessoa(dto.getEmailPessoa());
         updatePessoa.setNomePessoa(dto.getNomePessoa());
-        updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
+//        updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
 
         return null;
     }

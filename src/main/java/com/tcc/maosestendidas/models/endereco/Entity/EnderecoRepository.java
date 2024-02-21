@@ -8,6 +8,8 @@ public interface EnderecoRepository extends JpaRepository<Endereco, String> {
 
     Optional<Endereco> findById(String idEndereco);
 
+    //Endereco listaEndereco(String cep);
+
     Optional<Endereco> findByLogradouro(String logradouro);
 
     Optional<Endereco> findByBairro(String bairro);
@@ -17,4 +19,5 @@ public interface EnderecoRepository extends JpaRepository<Endereco, String> {
     Optional<Endereco> findByCep(String cep);
 
 
+    //Optional<Endereco> findByCepEndereco(String cep);
 }

@@ -69,6 +69,20 @@ public class EnderecoServiceImpl implements EnderecoService{
         return endereco;
     }
 
+
+    /*@Override
+    public Endereco listaEndereco(String cep) {
+        if(cep.isEmpty()) throw new RuntimeException("Cep não informado");
+        Optional<Endereco> endereco = enderecoRepository.findByCepEndereco(cep);
+        if(endereco.isEmpty()) {
+            System.out.println("Endereco não encontrado no banco de dados, buscando no viacep");
+            return buscaEnderecoViaCep(cep);
+        } else {
+            return endereco.get();
+        }
+
+    }*/
+
     private Endereco converteDtoParaEndereco(EnderecoDTO dto){
         Endereco endereco = new Endereco();
 
