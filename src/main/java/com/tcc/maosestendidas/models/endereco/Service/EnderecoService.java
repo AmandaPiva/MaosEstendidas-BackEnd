@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EnderecoService {
+
     List<Endereco> listaEnderecos();
 
     Endereco buscaEnderecoPeloLogradouro(String logradouro);
@@ -18,7 +19,7 @@ public interface EnderecoService {
 
     Endereco listarEnderecosPelaCidade(String cidade);
 
-
+    Endereco criaEndereco(String cep);
 
     Endereco cadastrarEnderecoManual(EnderecoDTO dto);
 
