@@ -28,7 +28,7 @@ public class DoacoesController {
     }
 
     @GetMapping("/buscaDoacoesPelaPessoa/{idPessoa}")
-    public ResponseEntity<?> buscaDoacaoPelaPessoa(@PathVariable("id") String idPessoa){
+    public ResponseEntity<?> buscaDoacaoPelaPessoa(@PathVariable("idPessoa") String idPessoa){
         return new ResponseEntity<List<Doacoes>>(doacoesService.buscarDoacaoPelaPessoa(idPessoa), HttpStatus.OK);
     }
 
