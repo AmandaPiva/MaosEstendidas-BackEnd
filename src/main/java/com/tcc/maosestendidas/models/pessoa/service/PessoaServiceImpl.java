@@ -78,8 +78,15 @@ public class PessoaServiceImpl implements PessoaService{
         pessoa.setEmailPessoa(dto.getEmailPessoa());
         pessoa.setCpfPessoa(dto.getCpfPessoa());
         pessoa.setRolePessoa(pessoaRole.get());
+        pessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
 //        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
         return pessoa;
+    }
+
+    //senha de gerar hash para criptografar a senha
+    private String geraSenhaHash(String senha) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return  passwordEncoder.encode(senha);
     }
 
     @Override
