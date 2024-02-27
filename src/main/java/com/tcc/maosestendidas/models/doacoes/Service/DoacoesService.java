@@ -2,6 +2,7 @@ package com.tcc.maosestendidas.models.doacoes.Service;
 
 import com.tcc.maosestendidas.models.doacoes.DTO.DoacoesDTO;
 import com.tcc.maosestendidas.models.doacoes.entity.Doacoes;
+import com.tcc.maosestendidas.models.doacoes.entity.StatusDoacao;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,8 @@ public interface DoacoesService {
     Doacoes buscarDoacaoPeloId(String idDoacao);
 
     List<Doacoes> buscarDoacaoPelaPessoa(String idPessoa);
+
+    List<Doacoes> buscarDoacaoPeloStatus(StatusDoacao statusDoacao);
 
     Doacoes criaDoacao(DoacoesDTO dto);
 

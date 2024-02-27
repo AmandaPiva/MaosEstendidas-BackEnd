@@ -3,6 +3,7 @@ package com.tcc.maosestendidas.models.doacoes.Service;
 import com.tcc.maosestendidas.models.doacoes.DTO.DoacoesDTO;
 import com.tcc.maosestendidas.models.doacoes.entity.Doacoes;
 import com.tcc.maosestendidas.models.doacoes.entity.DoacoesRepository;
+import com.tcc.maosestendidas.models.doacoes.entity.StatusDoacao;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class DoacoesServiceImpl implements DoacoesService{
@@ -42,6 +45,13 @@ public class DoacoesServiceImpl implements DoacoesService{
     }
 
     @Override
+    public List<Doacoes> buscarDoacaoPeloStatus(StatusDoacao statusDoacao) {
+        return doacoesRepository.findAll().stream()
+                .filter(doacoes -> doacoes.getStatusDoacao() == statusDoacao)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Doacoes criaDoacao(DoacoesDTO dto) {
         Doacoes doacoes = converteDtoParaDoacao(dto);
         doacoesRepository.save(doacoes);
@@ -57,6 +67,7 @@ public class DoacoesServiceImpl implements DoacoesService{
 
         doacoes.setDescricao(dto.getDescricao());
         doacoes.setPessoaDoadora(pessoa.get());
+        doacoes.setStatusDoacao(dto.getStatusDoacao());
 
         return doacoes;
 
@@ -70,6 +81,7 @@ public class DoacoesServiceImpl implements DoacoesService{
         Doacoes updateDoacao = doacoes.get();
 
         updateDoacao.setDescricao(dto.getDescricao());
+        updateDoacao.setStatusDoacao(dto.getStatusDoacao());
 
         return updateDoacao;
     }

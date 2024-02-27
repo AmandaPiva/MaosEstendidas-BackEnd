@@ -50,6 +50,8 @@ public class RequisicaoController {
         return new ResponseEntity<Requisicao>(requisicaoService.updateRequisicao(dto, id), HttpStatus.OK);
     }
 
+    //DISCUTIR A POSSIBILIDADE DE TER UPDATE DO STATUS DA REQUISICAO
+
     @DeleteMapping("/{id}")
     public void deleteRequisicao(@PathVariable("id") String id){
         requisicaoService.deleteRequisicao(id);

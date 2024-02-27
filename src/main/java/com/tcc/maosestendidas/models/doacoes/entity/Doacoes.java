@@ -18,4 +18,7 @@ public class Doacoes {
 
     private String descricao;
 
+    @Enumerated(EnumType.STRING)
+    private StatusDoacao statusDoacao;
+
 }
