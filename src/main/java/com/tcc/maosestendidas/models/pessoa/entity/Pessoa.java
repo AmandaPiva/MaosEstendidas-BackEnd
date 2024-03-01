@@ -40,8 +40,7 @@ public class Pessoa implements UserDetails {
     private Endereco endereco;
 
     @OneToMany
-    @JoinColumn(name = "idRequisicao")
-    private Requisicao requisicao;
+    private Set<Requisicao> requisicoes;
 
     @OneToMany
     private Set<Doacao> doacoes;
