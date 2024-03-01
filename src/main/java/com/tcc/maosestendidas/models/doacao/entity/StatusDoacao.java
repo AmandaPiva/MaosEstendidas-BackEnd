@@ -1,4 +1,4 @@
-package com.tcc.maosestendidas.models.doacoes.entity;
+package com.tcc.maosestendidas.models.doacao.entity;
 
 public enum StatusDoacao {
     ABERTA,

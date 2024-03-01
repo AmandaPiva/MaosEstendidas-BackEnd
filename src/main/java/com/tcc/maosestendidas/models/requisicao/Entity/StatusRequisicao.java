@@ -2,6 +2,6 @@ package com.tcc.maosestendidas.models.requisicao.Entity;
 
 public enum StatusRequisicao {
     ABERTA,
-    ATENDIDA,
+    EM_ANDAMENTO,
     CONCLUIDA
 }

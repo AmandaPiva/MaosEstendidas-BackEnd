@@ -51,6 +51,7 @@ public class RequisicaoController {
     }
 
     //DISCUTIR A POSSIBILIDADE DE TER UPDATE DO STATUS DA REQUISICAO
+    
 
     @DeleteMapping("/{id}")
     public void deleteRequisicao(@PathVariable("id") String id){

@@ -1,4 +1,4 @@
-package com.tcc.maosestendidas.models.doacoes.entity;
+package com.tcc.maosestendidas.models.doacao.entity;
 
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import jakarta.persistence.*;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Doacoes {
+public class Doacao {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String idDoacao;
