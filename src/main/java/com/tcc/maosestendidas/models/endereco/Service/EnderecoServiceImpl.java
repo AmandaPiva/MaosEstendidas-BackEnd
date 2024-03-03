@@ -6,6 +6,8 @@ import com.tcc.maosestendidas.models.endereco.DTO.EnderecoDTO;
 import com.tcc.maosestendidas.models.endereco.DTO.EnderecoViaCepDTO;
 import com.tcc.maosestendidas.models.endereco.Entity.Endereco;
 import com.tcc.maosestendidas.models.endereco.Entity.EnderecoRepository;
+import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
+import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class EnderecoServiceImpl implements EnderecoService{
 
     @Autowired
     private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
 
     public List<Endereco> listaEnderecos() {
@@ -122,6 +127,7 @@ public class EnderecoServiceImpl implements EnderecoService{
 
     private Endereco converteDtoParaEndereco(EnderecoDTO dto){
         Endereco endereco = new Endereco();
+
 
         endereco.setLogradouro(dto.getLogradouro());
         endereco.setBairro(dto.getBairro());

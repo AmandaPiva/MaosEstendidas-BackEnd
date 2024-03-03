@@ -1,10 +1,10 @@
 package com.tcc.maosestendidas.models.endereco.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,4 +18,7 @@ public class Endereco {
     private String cidade;
     private Integer numero;
     private String cep;
+
+    @OneToMany
+    private Set<Pessoa> pessoas;
 }

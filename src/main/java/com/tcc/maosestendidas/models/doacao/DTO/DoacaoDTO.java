@@ -8,4 +8,5 @@ public class DoacaoDTO {
     private String pessoaDoadora;
     private String descricao;
     private StatusDoacao statusDoacao;
+    private String requisicao;
 }

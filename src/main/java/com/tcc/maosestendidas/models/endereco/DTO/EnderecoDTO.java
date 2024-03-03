@@ -9,4 +9,5 @@ public class EnderecoDTO {
     private String cidade;
     private Integer numero;
     private String cep;
+    private String pessoas;
 }

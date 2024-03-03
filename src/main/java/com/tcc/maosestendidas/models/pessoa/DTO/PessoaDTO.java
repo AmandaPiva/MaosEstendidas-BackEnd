@@ -15,6 +15,8 @@ public class PessoaDTO {
 
     private String rolePessoa;
 
+    private String endereco;
+
 //    private LocalDate dataNascimentoPessoa;
 
 }

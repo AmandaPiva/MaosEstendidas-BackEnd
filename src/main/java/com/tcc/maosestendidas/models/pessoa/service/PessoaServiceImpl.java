@@ -1,5 +1,7 @@
 package com.tcc.maosestendidas.models.pessoa.service;
 
+import com.tcc.maosestendidas.models.endereco.Entity.Endereco;
+import com.tcc.maosestendidas.models.endereco.Entity.EnderecoRepository;
 import com.tcc.maosestendidas.models.pessoa.DTO.PessoaDTO;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
@@ -27,6 +29,8 @@ public class PessoaServiceImpl implements PessoaService{
     @Autowired
     private PessoaRoleRepository pessoaRoleRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
     @Override
     public List<Pessoa> listaPessoas() {
         return pessoaRepository.findAll();
@@ -73,12 +77,14 @@ public class PessoaServiceImpl implements PessoaService{
         Pessoa pessoa = new Pessoa();
 
         Optional<PessoaRole> pessoaRole = pessoaRoleRepository.findById(dto.getRolePessoa());
+        Optional<Endereco> endereco = enderecoRepository.findById(dto.getEndereco());
 
         pessoa.setNomePessoa(dto.getNomePessoa());
         pessoa.setEmailPessoa(dto.getEmailPessoa());
         pessoa.setCpfPessoa(dto.getCpfPessoa());
         pessoa.setRolePessoa(pessoaRole.get());
         pessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
+        pessoa.setEndereco(endereco.get());
 //        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
         return pessoa;
     }
