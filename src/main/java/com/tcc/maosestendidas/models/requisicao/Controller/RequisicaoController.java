@@ -1,6 +1,7 @@
 package com.tcc.maosestendidas.models.requisicao.Controller;
 
 import com.tcc.maosestendidas.models.requisicao.DTO.RequisicaoDTO;
+import com.tcc.maosestendidas.models.requisicao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import com.tcc.maosestendidas.models.requisicao.Entity.StatusRequisicao;
 import com.tcc.maosestendidas.models.requisicao.Service.RequisicaoService;
@@ -43,6 +44,11 @@ public class RequisicaoController {
     @PostMapping
     public ResponseEntity<?> criaRequisicao(@RequestBody RequisicaoDTO dto){
         return new ResponseEntity<Requisicao>(requisicaoService.criaRequisicao(dto), HttpStatus.CREATED);
+    }
+
+        @PutMapping("/vinculaDoacaoARequisicao")
+    public ResponseEntity<?> vinculaDoacaoARequisicao(@RequestBody VinculaDoacaoNaRequisicaoDTO dto){
+        return new ResponseEntity<Requisicao>(requisicaoService.vinculaDoacaoNaRequisicao(dto), HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")

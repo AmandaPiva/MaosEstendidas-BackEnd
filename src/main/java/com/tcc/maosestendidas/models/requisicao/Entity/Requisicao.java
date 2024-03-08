@@ -28,6 +28,8 @@ public class Requisicao {
     @Enumerated(EnumType.STRING)
     private StatusRequisicao statusRequisicao;
 
+
+
     //DATA EM TEMPO REAL DA REQUISIÇÃO
 
 }

@@ -1,8 +1,11 @@
 package com.tcc.maosestendidas.models.requisicao.Service;
 
+import com.tcc.maosestendidas.models.doacao.entity.Doacao;
+import com.tcc.maosestendidas.models.doacao.entity.DoacaoRepository;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
 import com.tcc.maosestendidas.models.requisicao.DTO.RequisicaoDTO;
+import com.tcc.maosestendidas.models.requisicao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import com.tcc.maosestendidas.models.requisicao.Entity.RequisicaoRepository;
 import com.tcc.maosestendidas.models.requisicao.Entity.StatusRequisicao;
@@ -22,6 +25,9 @@ public class RequisicaoServiceImpl implements RequisicaoService{
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private DoacaoRepository doacaoRepository;
 
     @Override
     public List<Requisicao> listarRequisicoes() {
@@ -76,6 +82,23 @@ public class RequisicaoServiceImpl implements RequisicaoService{
         //ESTA FALTANDO A DATA
 
         return requisicao;
+    }
+
+    @Override
+    public Requisicao vinculaDoacaoNaRequisicao(VinculaDoacaoNaRequisicaoDTO dto){
+        Optional<Doacao> doacao = doacaoRepository.findById(dto.getIdDoacao());
+        if(doacao.isEmpty()) throw new RuntimeException("Doação ainda não criada");
+
+        Optional<Requisicao> requisicao = requisicaoRepository.findById(dto.getIdRequisicao());
+        if(requisicao.isEmpty()) throw new RuntimeException("Requisição não encontrada pelo id informado");
+
+        Requisicao requisicao1 = requisicao.get();
+
+        requisicao1.getDoacoes().add(doacao.get());
+
+        requisicaoRepository.save(requisicao1);
+
+        return requisicao1;
     }
 
     @Override
