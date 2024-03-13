@@ -9,6 +9,7 @@ import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,6 +68,7 @@ public class DoacaoServiceImpl implements DoacaoService {
         doacao.setDescricao(dto.getDescricao());
         doacao.setPessoaDoadora(pessoa.get());
         doacao.setStatusDoacao(dto.getStatusDoacao());
+        doacao.setDataDoacao(LocalDateTime.now());
 
         return doacao;
 

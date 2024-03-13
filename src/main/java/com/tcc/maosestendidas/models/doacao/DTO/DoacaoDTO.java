@@ -9,4 +9,5 @@ public class DoacaoDTO {
     private String descricao;
     private StatusDoacao statusDoacao;
     private String requisicao;
+    private String dataDoacao;
 }

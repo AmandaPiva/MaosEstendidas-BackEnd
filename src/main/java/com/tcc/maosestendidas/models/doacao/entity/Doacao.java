@@ -5,6 +5,7 @@ import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -24,6 +25,8 @@ public class Doacao {
    private Requisicao requisicao;
 
     private String descricao;
+
+    private LocalDateTime dataDoacao;
 
     @Enumerated(EnumType.STRING)
     private StatusDoacao statusDoacao;

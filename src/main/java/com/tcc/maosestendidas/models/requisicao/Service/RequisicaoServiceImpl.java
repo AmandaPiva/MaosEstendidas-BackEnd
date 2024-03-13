@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -78,8 +79,8 @@ public class RequisicaoServiceImpl implements RequisicaoService{
         requisicao.setDescricaoRequisicao(dto.getDescricaoRequisicao());
         requisicao.setPessoaDonataria(pessoa.get());
         requisicao.setStatusRequisicao(dto.getStatusRequisicao());
+        requisicao.setDataRequisicao(LocalDateTime.now());
 
-        //ESTA FALTANDO A DATA
 
         return requisicao;
     }

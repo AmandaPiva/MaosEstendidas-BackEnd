@@ -5,6 +5,7 @@ import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -28,8 +29,8 @@ public class Requisicao {
     @Enumerated(EnumType.STRING)
     private StatusRequisicao statusRequisicao;
 
-
-
     //DATA EM TEMPO REAL DA REQUISIÇÃO
+    private LocalDateTime dataRequisicao;
+
 
 }
