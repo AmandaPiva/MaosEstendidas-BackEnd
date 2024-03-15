@@ -38,6 +38,19 @@ public class DoacaoController {
         return doacaoService.buscarDoacaoPeloStatus(status);
     }
 
+    @PatchMapping("/mudarStatusDoacao/{id}/{statusDoacao}")
+    public ResponseEntity<?> atualizarStatusDoacao(@PathVariable("id") String id, @PathVariable String statusDoacao){
+        try {
+            StatusDoacao novoStatus = StatusDoacao.valueOf(statusDoacao.toUpperCase());
+            Doacao doacaoAtualizada = doacaoService.updateStatusDoacao(id, novoStatus);
+            return new ResponseEntity<>(doacaoAtualizada, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Status de doação inválido", HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<?> criaDoacao(@RequestBody DoacaoDTO dto){
         return new ResponseEntity<Doacao>(doacaoService.criaDoacao(dto), HttpStatus.CREATED);

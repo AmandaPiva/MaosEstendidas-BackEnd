@@ -20,6 +20,8 @@ public interface RequisicaoService {
 
     Requisicao vinculaDoacaoNaRequisicao(VinculaDoacaoNaRequisicaoDTO dto);
 
+    Requisicao updateStatusRequisicao(String idRequisicao, StatusRequisicao novoStatus);
+
     Requisicao updateRequisicao(RequisicaoDTO dto, String idRequisicao);
 
     void deleteRequisicao(String idRequisicao);

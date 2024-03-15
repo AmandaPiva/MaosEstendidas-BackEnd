@@ -46,18 +46,28 @@ public class RequisicaoController {
         return new ResponseEntity<Requisicao>(requisicaoService.criaRequisicao(dto), HttpStatus.CREATED);
     }
 
-        @PutMapping("/vinculaDoacaoARequisicao")
+    @PutMapping("/vinculaDoacaoARequisicao")
     public ResponseEntity<?> vinculaDoacaoARequisicao(@RequestBody VinculaDoacaoNaRequisicaoDTO dto){
         return new ResponseEntity<Requisicao>(requisicaoService.vinculaDoacaoNaRequisicao(dto), HttpStatus.OK);
+    }
+
+    @PatchMapping("/mudarStatusRequisicao/{id}/{statusRequisicao}")
+    public ResponseEntity<?> atualizarStatusRequisicao(@PathVariable("id") String id, @PathVariable String statusRequisicao){
+        try{
+            StatusRequisicao novoStatus = StatusRequisicao.valueOf(statusRequisicao.toUpperCase());
+            Requisicao requisicaoAtualizada = requisicaoService.updateStatusRequisicao(id, novoStatus);
+            return new ResponseEntity<>(requisicaoAtualizada, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("Status de requisição inválido", HttpStatus.BAD_REQUEST);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateRequisicao(@RequestBody RequisicaoDTO dto, @PathVariable("id") String id){
         return new ResponseEntity<Requisicao>(requisicaoService.updateRequisicao(dto, id), HttpStatus.OK);
     }
-
-    //DISCUTIR A POSSIBILIDADE DE TER UPDATE DO STATUS DA REQUISICAO
-    
 
     @DeleteMapping("/{id}")
     public void deleteRequisicao(@PathVariable("id") String id){

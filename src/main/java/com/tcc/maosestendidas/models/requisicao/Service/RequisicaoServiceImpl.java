@@ -73,8 +73,6 @@ public class RequisicaoServiceImpl implements RequisicaoService{
         Optional<Pessoa> pessoa = pessoaRepository.findById(dto.getPessoaDonataria());
         if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
 
-
-
         requisicao.setTituloRequisicao(dto.getTituloRequisicao());
         requisicao.setDescricaoRequisicao(dto.getDescricaoRequisicao());
         requisicao.setPessoaDonataria(pessoa.get());
@@ -100,6 +98,20 @@ public class RequisicaoServiceImpl implements RequisicaoService{
         requisicaoRepository.save(requisicao1);
 
         return requisicao1;
+    }
+
+    @Override
+    public Requisicao updateStatusRequisicao(String idRequisicao, StatusRequisicao novoStatus){
+        Optional<Requisicao> requisicaoOptional = requisicaoRepository.findById(idRequisicao);
+        if(requisicaoOptional.isEmpty()) {
+            throw new RuntimeException("Requisição não encontrada pelo id informado");
+        }
+
+        Requisicao requisicao = requisicaoOptional.get();
+        requisicao.setStatusRequisicao(novoStatus);
+        requisicao.setDataRequisicao(LocalDateTime.now());
+
+        return requisicaoRepository.save(requisicao);
     }
 
     @Override

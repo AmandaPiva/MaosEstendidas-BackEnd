@@ -31,6 +31,4 @@ public class Requisicao {
 
     //DATA EM TEMPO REAL DA REQUISIÇÃO
     private LocalDateTime dataRequisicao;
-
-
 }

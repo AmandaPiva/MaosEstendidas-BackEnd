@@ -75,6 +75,20 @@ public class DoacaoServiceImpl implements DoacaoService {
     }
 
     @Override
+    public Doacao updateStatusDoacao(String idDoacao, StatusDoacao novoStatus) {
+        Optional<Doacao> doacaoOptional = doacaoRepository.findById(idDoacao);
+        if (doacaoOptional.isEmpty()) {
+            throw new RuntimeException("Doação não encontrada pelo id informado");
+        }
+
+        Doacao doacao = doacaoOptional.get();
+        doacao.setStatusDoacao(novoStatus);
+        doacao.setDataDoacao(LocalDateTime.now());
+
+        return doacaoRepository.save(doacao);
+    }
+
+    @Override
     public Doacao updateDoacao(DoacaoDTO dto, String idDoacao) {
         Optional<Doacao> doacao = doacaoRepository.findById(idDoacao);
         if(doacao.isEmpty()) throw new RuntimeException("Doação não encontrada pelo id informado");

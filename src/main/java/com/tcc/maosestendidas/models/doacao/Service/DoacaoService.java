@@ -17,6 +17,8 @@ public interface DoacaoService {
 
     Doacao criaDoacao(DoacaoDTO dto);
 
+    Doacao updateStatusDoacao(String idDoacao, StatusDoacao novoStatus);
+
     Doacao updateDoacao(DoacaoDTO dto, String idDoacao);
 
 
