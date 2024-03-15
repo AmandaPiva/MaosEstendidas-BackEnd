@@ -1,5 +1,6 @@
 package com.tcc.maosestendidas.models.requisicao.Entity;
 
+import com.tcc.maosestendidas.models.Chat.Entity.Chat;
 import com.tcc.maosestendidas.models.doacao.entity.Doacao;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import jakarta.persistence.*;
@@ -21,6 +22,9 @@ public class Requisicao {
 
     @OneToMany
     private Set<Doacao> doacoes;
+
+    @OneToMany
+    private Set<Chat> mensagens;
 
     private String tituloRequisicao;
     private String descricaoRequisicao;

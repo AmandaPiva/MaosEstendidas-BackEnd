@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class ChatDTO {
     private String pessoaRemetente;
     private String mensagem;
+    private String requisicao;
     private LocalDateTime timestamp;
 
 

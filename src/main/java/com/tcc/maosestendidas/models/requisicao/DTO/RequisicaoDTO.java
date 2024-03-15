@@ -11,6 +11,6 @@ public class RequisicaoDTO {
     private String tituloRequisicao;
     private String descricaoRequisicao;
     private StatusRequisicao statusRequisicao;
+    private String mensagens;
     private String doacoes;
-
 }
