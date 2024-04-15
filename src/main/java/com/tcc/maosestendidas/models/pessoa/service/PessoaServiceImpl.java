@@ -107,7 +107,9 @@ public class PessoaServiceImpl implements PessoaService{
         updatePessoa.setNomePessoa(dto.getNomePessoa());
 //        updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
 
-        return null;
+        pessoaRepository.save(updatePessoa);
+
+        return updatePessoa;
     }
 
     //CRIPTOGRAFIA DE SENHAS

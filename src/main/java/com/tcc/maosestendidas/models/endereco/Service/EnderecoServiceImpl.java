@@ -38,10 +38,10 @@ public class EnderecoServiceImpl implements EnderecoService{
 
 
     public Endereco buscaEnderecoPeloCep(String cep) {
-        if(cep.isEmpty()) throw new RuntimeException("Cep não informado");
-        Endereco endereco = enderecoRepository.findByCep(cep);
+        Optional<Endereco> endereco = enderecoRepository.findByCep(cep);
+        if(endereco.isEmpty()) throw new RuntimeException("Endereço não encontrado pelo cep informado");
 
-            return buscaEnderecoViaCep(cep);
+        return endereco.get();
     }
 
     @Override
@@ -151,6 +151,7 @@ public class EnderecoServiceImpl implements EnderecoService{
         updateEndereco.setCep(dto.getCep());
         updateEndereco.setNumero(dto.getNumero());
 
+        enderecoRepository.save(updateEndereco);
 
         return updateEndereco;
     }
