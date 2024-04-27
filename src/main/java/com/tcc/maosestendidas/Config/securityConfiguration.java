@@ -43,6 +43,8 @@ public class securityConfiguration {
                         request.requestMatchers(
                                 new AntPathRequestMatcher("/"),
                                 new AntPathRequestMatcher("/api/v1/login/executa"),
+                                new AntPathRequestMatcher("/api/v1/login/valida"),
+                                new AntPathRequestMatcher("/api/v1/pessoa/role"),
                                 new AntPathRequestMatcher("/error")
                         ).permitAll().anyRequest().authenticated()
                 )
