@@ -5,11 +5,13 @@ import com.tcc.maosestendidas.models.endereco.Entity.Endereco;
 import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -26,10 +28,10 @@ public class Pessoa implements UserDetails {
 
     private String senhaPessoa;
 
-    private String cpfPessoa;
+    private String documentoPessoa;
 
-//    @DateTimeFormat(pattern = "dd-MM-yyyy")
-//    private LocalDate dataNascimentoPessoa;
+
+    private LocalDate dataNascimentoPessoa;
 
     @ManyToOne
     @JoinColumn(name = "idPessoaRole")

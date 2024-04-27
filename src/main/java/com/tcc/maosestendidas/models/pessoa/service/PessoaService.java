@@ -16,7 +16,7 @@ public interface PessoaService {
     Optional<Pessoa> buscaPessoaPeloEmailOptional(String email);
 
 
-    Pessoa buscaPessoaPeloCpf(String cpfPessoa);
+    Pessoa buscaPessoaPeloDocumento(String documentoPessoa);
 
     Pessoa criaPessoa(PessoaDTO dto);
 

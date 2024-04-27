@@ -12,11 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pessoa")
+
 public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
-
-
 
     @GetMapping
     public ResponseEntity<?> listaPessoas(){
@@ -28,9 +27,9 @@ public class PessoaController {
         return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloEmail(emailPessoa), HttpStatus.OK);
     }
 
-    @GetMapping("/buscarPeloCpf/{cpfPessoa}")
-    public ResponseEntity<?> buscarPessoaPeloCpf(@PathVariable("cpfPessoa") String cpfPessoa){
-        return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloCpf(cpfPessoa), HttpStatus.OK);
+    @GetMapping("/buscarPeloDocumento/{documentoPessoa}")
+    public ResponseEntity<?> buscarPessoaPeloDocumento(@PathVariable("documentoPessoa") String documentoPessoa){
+        return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloDocumento(documentoPessoa), HttpStatus.OK);
     }
 
     @PostMapping

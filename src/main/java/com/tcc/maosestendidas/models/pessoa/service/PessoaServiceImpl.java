@@ -50,9 +50,9 @@ public class PessoaServiceImpl implements PessoaService{
     }
 
     @Override
-    public Pessoa buscaPessoaPeloCpf(String cpfPessoa) {
-        Optional<Pessoa> pessoa = pessoaRepository.findByCpfPessoa(cpfPessoa);
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo cpf informado");
+    public Pessoa buscaPessoaPeloDocumento(String documentoPessoa) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByDocumentoPessoa(documentoPessoa);
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo documento informado");
 
         return pessoa.get();
     }
@@ -81,11 +81,11 @@ public class PessoaServiceImpl implements PessoaService{
 
         pessoa.setNomePessoa(dto.getNomePessoa());
         pessoa.setEmailPessoa(dto.getEmailPessoa());
-        pessoa.setCpfPessoa(dto.getCpfPessoa());
+        pessoa.setDocumentoPessoa(dto.getDocumentoPessoa());
         pessoa.setRolePessoa(pessoaRole.get());
         pessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
         pessoa.setEndereco(endereco.get());
-//        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
+        pessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
         return pessoa;
     }
 
@@ -102,10 +102,10 @@ public class PessoaServiceImpl implements PessoaService{
 
         Pessoa updatePessoa = pessoa.get();
 
-        updatePessoa.setCpfPessoa(dto.getCpfPessoa());
+        updatePessoa.setDocumentoPessoa(dto.getDocumentoPessoa());
         updatePessoa.setEmailPessoa(dto.getEmailPessoa());
         updatePessoa.setNomePessoa(dto.getNomePessoa());
-//        updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
+        updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
 
         pessoaRepository.save(updatePessoa);
 
