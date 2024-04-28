@@ -69,18 +69,32 @@ public class EnderecoServiceImpl implements EnderecoService{
         return endereco.get();
     }
 
-    /*@Override
+    //busca endereco pelo cep usando a API viacep
+    @Override
+    public Endereco listaEnderecoViaCep(String cep) {
+        if(cep.isEmpty()) throw new RuntimeException("Cep não informado");
+        Optional<Endereco> endereco = enderecoRepository.findByCep(cep);
+        if(endereco.isEmpty()){
+            System.out.println("Endereço não encontrado no banco de dados, buscando no viacep");
+            return buscaEnderecoViaCep(cep);
+        }
+        else{
+            return endereco.get();
+        }
+    }
+
+    //existem dois tipos do método criaEndereco, um se aplica ao endereco sendo inserido manualmente, o outro quando for buscar o endereço pela API viacep
     @Transactional
-    public Endereco cadastrarEnderecoPeloCep() {
-        return null;
-    }*/
+    public Endereco criaEndereco(Endereco endereco) {
+        enderecoRepository.save(endereco);
+        return endereco;
+    }
 
     @Override
     @Transactional
-    public Endereco cadastrarEnderecoManual(EnderecoDTO dto) {
+    public Endereco criaEndereco(EnderecoDTO dto){
         Endereco endereco = converteDtoParaEndereco(dto);
         enderecoRepository.save(endereco);
-
         return endereco;
     }
 
@@ -102,7 +116,7 @@ public class EnderecoServiceImpl implements EnderecoService{
 
             EnderecoViaCepDTO e = new ObjectMapper().readValue(json, EnderecoViaCepDTO.class);
             e.setCep(cep);
-            return converteEnderecoViaCep(e);
+            return criaEndereco(converteEnderecoViaCep(e)); //Cria endereco com os dados vindos do DTO da API viacep
 
         } catch (Exception ex) {
             log.error(ex.getMessage());
@@ -110,19 +124,16 @@ public class EnderecoServiceImpl implements EnderecoService{
         }
     }
 
-    private Endereco converteEnderecoViaCep(EnderecoViaCepDTO enderecoViaCepDTO) {
+    private Endereco converteEnderecoViaCep(EnderecoViaCepDTO dto) {
         Endereco endereco = new Endereco();
-        endereco.setCep(enderecoViaCepDTO.getCep());
-        endereco.setCidade(enderecoViaCepDTO.getLocalidade());
-        endereco.setLogradouro(enderecoViaCepDTO.getLogradouro());
-        endereco.setBairro(enderecoViaCepDTO.getBairro());
+        endereco.setCep(dto.getCep());
+        endereco.setCidade(dto.getLocalidade());
+        endereco.setLogradouro(dto.getLogradouro());
+        endereco.setBairro(dto.getBairro());
+
+
 
         return endereco;
-    }
-
-    @Override
-    public Endereco criaEndereco(String cep) {
-        return buscaEnderecoViaCep(cep);
     }
 
     private Endereco converteDtoParaEndereco(EnderecoDTO dto){

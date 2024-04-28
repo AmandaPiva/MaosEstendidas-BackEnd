@@ -11,17 +11,20 @@ public interface EnderecoService {
 
     List<Endereco> listaEnderecos();
 
+
+
     Endereco buscaEnderecoPeloLogradouro(String logradouro);
 
     Endereco buscaEnderecoPeloCep(String cep);
+
 
     Endereco listarEnderecosPeloBairro(String bairro);
 
     Endereco listarEnderecosPelaCidade(String cidade);
 
-    Endereco criaEndereco(String cep);
+    Endereco listaEnderecoViaCep(String cep);
 
-    Endereco cadastrarEnderecoManual(EnderecoDTO dto);
+    Endereco criaEndereco(EnderecoDTO dto);
 
     Endereco updateEndereco(EnderecoDTO dto, String idEndereco);
 
