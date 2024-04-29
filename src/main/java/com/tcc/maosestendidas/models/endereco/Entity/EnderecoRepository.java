@@ -14,5 +14,7 @@ public interface EnderecoRepository extends JpaRepository<Endereco, String> {
 
     Optional<Endereco> findByBairro(String bairro);
 
+    Optional<Endereco> findByEstado(String estado);
+
     Optional<Endereco> findByCidade(String cidade);
 }

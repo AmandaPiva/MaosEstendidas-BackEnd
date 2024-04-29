@@ -24,6 +24,7 @@ public interface EnderecoService {
 
     Endereco listaEnderecoViaCep(String cep);
 
+    Endereco listaEnderecosPeloEstado(String estado);
     Endereco criaEndereco(EnderecoDTO dto);
 
     Endereco updateEndereco(EnderecoDTO dto, String idEndereco);

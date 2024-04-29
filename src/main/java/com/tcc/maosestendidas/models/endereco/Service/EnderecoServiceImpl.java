@@ -83,6 +83,14 @@ public class EnderecoServiceImpl implements EnderecoService{
         }
     }
 
+    @Override
+    public Endereco listaEnderecosPeloEstado(String estado) {
+        Optional<Endereco> endereco = enderecoRepository.findByEstado(estado);
+        if(endereco.isEmpty()) throw new RuntimeException("Endereço não encontrado pelo estado informado");
+
+        return endereco.get();
+    }
+
     //existem dois tipos do método criaEndereco, um se aplica ao endereco sendo inserido manualmente, o outro quando for buscar o endereço pela API viacep
     @Transactional
     public Endereco criaEndereco(Endereco endereco) {
@@ -128,10 +136,9 @@ public class EnderecoServiceImpl implements EnderecoService{
         Endereco endereco = new Endereco();
         endereco.setCep(dto.getCep());
         endereco.setCidade(dto.getLocalidade());
+        endereco.setEstado(dto.getUf());
         endereco.setLogradouro(dto.getLogradouro());
         endereco.setBairro(dto.getBairro());
-
-
 
         return endereco;
     }
@@ -139,10 +146,10 @@ public class EnderecoServiceImpl implements EnderecoService{
     private Endereco converteDtoParaEndereco(EnderecoDTO dto){
         Endereco endereco = new Endereco();
 
-
         endereco.setLogradouro(dto.getLogradouro());
         endereco.setBairro(dto.getBairro());
         endereco.setCidade(dto.getCidade());
+        endereco.setEstado(dto.getEstado());
         endereco.setCep(dto.getCep());
         endereco.setNumero(dto.getNumero());
 
@@ -158,6 +165,7 @@ public class EnderecoServiceImpl implements EnderecoService{
 
         updateEndereco.setLogradouro(dto.getLogradouro());
         updateEndereco.setBairro(dto.getBairro());
+        updateEndereco.setEstado(dto.getEstado());
         updateEndereco.setCidade(dto.getCidade());
         updateEndereco.setCep(dto.getCep());
         updateEndereco.setNumero(dto.getNumero());

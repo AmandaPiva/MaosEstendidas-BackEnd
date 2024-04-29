@@ -45,7 +45,12 @@ public class EnderecoController {
         return new ResponseEntity<Endereco>(enderecoService.listarEnderecosPelaCidade(cidade), HttpStatus.OK);
     }
 
-    @GetMapping("/{cep}")
+    @GetMapping("/buscaPeloEstado/{estado}")
+    public ResponseEntity<?> buscarEnderecoPeloEstado(@PathVariable("estado") String estado){
+        return new ResponseEntity<Endereco>(enderecoService.listaEnderecosPeloEstado(estado), HttpStatus.OK);
+    }
+
+    @GetMapping("/viacep/{cep}")
     public ResponseEntity<Endereco> listaEndereco(@PathVariable("cep") String cep) {
         return new ResponseEntity<Endereco>(enderecoService.listaEnderecoViaCep(cep), HttpStatus.OK);
     }

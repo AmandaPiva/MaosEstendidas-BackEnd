@@ -47,6 +47,7 @@ public class securityConfiguration {
                                 new AntPathRequestMatcher("/api/v1/pessoa/role"),
                                 new AntPathRequestMatcher("/api/v1/pessoa"),
                                 new AntPathRequestMatcher("/api/v1/endereco"),
+                                new AntPathRequestMatcher("/api/v1/endereco/viacep/{cep}"),
 
                                 new AntPathRequestMatcher("/error")
                         ).permitAll().anyRequest().authenticated()
