@@ -44,9 +44,9 @@ public class RequisicaoServiceImpl implements RequisicaoService{
     }
 
     @Override
-    public List<Requisicao> buscarRequisicaoPelaPessoa(String idPessoa) {
-        Optional<Pessoa> pessoa = pessoaRepository.findById(idPessoa);
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
+    public List<Requisicao> buscarRequisicaoPelaPessoa(String emailPessoa) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(emailPessoa);
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
 
         return requisicaoRepository.findByPessoaDonataria(pessoa.get());
     }
@@ -70,8 +70,8 @@ public class RequisicaoServiceImpl implements RequisicaoService{
     private Requisicao converteDtoParaRequisicao(RequisicaoDTO dto){
         Requisicao requisicao = new Requisicao();
 
-        Optional<Pessoa> pessoa = pessoaRepository.findById(dto.getPessoaDonataria());
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
+        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(dto.getPessoaDonataria());
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
 
         requisicao.setTituloRequisicao(dto.getTituloRequisicao());
         requisicao.setDescricaoRequisicao(dto.getDescricaoRequisicao());

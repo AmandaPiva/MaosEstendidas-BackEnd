@@ -29,9 +29,9 @@ public class RequisicaoController {
         return new ResponseEntity<Requisicao>(requisicaoService.buscarRequisicaoPeloId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/buscaRequisicoesPelaPessoa/{idPessoa}")
-    public ResponseEntity<?> buscaRequisicaoPelaPessoa(@PathVariable("idPessoa") String idPessoa){
-        return new ResponseEntity<List<Requisicao>>(requisicaoService.buscarRequisicaoPelaPessoa(idPessoa), HttpStatus.OK);
+    @GetMapping("/buscaRequisicoesPelaPessoa/{emailPessoa}")
+    public ResponseEntity<?> buscaRequisicaoPelaPessoa(@PathVariable("emailPessoa") String emailPessoa){
+        return new ResponseEntity<List<Requisicao>>(requisicaoService.buscarRequisicaoPelaPessoa(emailPessoa), HttpStatus.OK);
     }
 
     @GetMapping("/buscaRequsicoesPeloStatus/{statusRequisicao}")

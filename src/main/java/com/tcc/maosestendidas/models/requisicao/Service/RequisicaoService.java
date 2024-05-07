@@ -12,7 +12,7 @@ public interface RequisicaoService {
 
     Requisicao buscarRequisicaoPeloId(String idRequisicao);
 
-    List<Requisicao> buscarRequisicaoPelaPessoa(String idPessoa);
+    List<Requisicao> buscarRequisicaoPelaPessoa(String emailPessoa);
 
     List<Requisicao> buscarRequisicaoPeloStatus(StatusRequisicao statusRequisicao);
 

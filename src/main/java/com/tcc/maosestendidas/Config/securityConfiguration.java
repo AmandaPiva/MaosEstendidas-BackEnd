@@ -48,6 +48,8 @@ public class securityConfiguration {
                                 new AntPathRequestMatcher("/api/v1/pessoa"),
                                 new AntPathRequestMatcher("/api/v1/endereco"),
                                 new AntPathRequestMatcher("/api/v1/endereco/viacep/{cep}"),
+                                new AntPathRequestMatcher("/api/v1/requisicao"),
+                                new AntPathRequestMatcher("/api/v1/requisicao/buscaRequisicoesPelaPessoa/{emailPessoa}"),
 
                                 new AntPathRequestMatcher("/error")
                         ).permitAll().anyRequest().authenticated()
