@@ -20,8 +20,8 @@ public class PessoaRoleServiceImpl implements PessoaRoleService{
     }
 
     @Override
-    public Optional<PessoaRole> buscarPessoaRolePeloNomeOptional(String role) {
-        return pessoaRoleRepository.findByRolePessoa(role);
+    public Optional<PessoaRole> buscarPessoaRolePeloNomeOptional(String pessoaRole) {
+        return pessoaRoleRepository.findByRolePessoa(pessoaRole);
     }
 
     @Override

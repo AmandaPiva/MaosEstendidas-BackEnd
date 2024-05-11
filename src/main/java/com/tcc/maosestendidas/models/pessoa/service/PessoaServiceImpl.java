@@ -112,6 +112,14 @@ public class PessoaServiceImpl implements PessoaService{
         return updatePessoa;
     }
 
+    @Override
+    public List<Pessoa> listarPessoasPelaRole(String idPessoaRole) {
+       Optional<PessoaRole> pessoaRole = pessoaRoleRepository.findById(idPessoaRole);
+       if(pessoaRole.isEmpty()) throw new RuntimeException("Não foi encontrado pessoas com esta role");
+
+        return pessoaRepository.findByRolePessoa(pessoaRole.get());
+    }
+
     //CRIPTOGRAFIA DE SENHAS
     @Override
     public Boolean comparaSenhas(String senhaCriptografada, String senha) {

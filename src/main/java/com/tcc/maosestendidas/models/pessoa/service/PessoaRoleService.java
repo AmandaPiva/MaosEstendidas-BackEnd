@@ -10,7 +10,7 @@ public interface PessoaRoleService {
 
     List<PessoaRole> listaPessoaRoles();
 
-    Optional<PessoaRole> buscarPessoaRolePeloNomeOptional(String role);
+    Optional<PessoaRole> buscarPessoaRolePeloNomeOptional(String pessoaRole);
 
     PessoaRole updatePessoaRole(PessoaRoleDTO dto, String idPessoaRole);
 

@@ -22,6 +22,12 @@ public class PessoaController {
         return new ResponseEntity<List<Pessoa>>(pessoaService.listaPessoas(), HttpStatus.OK);
     }
 
+    @GetMapping("/listaPessoasPelaRole/{idPessoaRole}")
+    public ResponseEntity<?> listarPessoasPelaRole(@PathVariable("idPessoaRole") String idPessoaRole){
+        return new ResponseEntity<List<Pessoa>>(pessoaService.listarPessoasPelaRole(idPessoaRole), HttpStatus.OK);
+    }
+
+
     @GetMapping("/buscaPeloEmail/{emailPessoa}")
     public ResponseEntity<?> buscarPessoaPeloEmail(@PathVariable("emailPessoa") String emailPessoa){
         return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloEmail(emailPessoa), HttpStatus.OK);

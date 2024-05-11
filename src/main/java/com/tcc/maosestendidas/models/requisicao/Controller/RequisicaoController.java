@@ -69,7 +69,7 @@ public class RequisicaoController {
         return new ResponseEntity<Requisicao>(requisicaoService.updateRequisicao(dto, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteRequisicao/{id}")
     public void deleteRequisicao(@PathVariable("id") String id){
         requisicaoService.deleteRequisicao(id);
     }

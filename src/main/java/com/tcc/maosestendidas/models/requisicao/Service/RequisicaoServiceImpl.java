@@ -123,8 +123,8 @@ public class RequisicaoServiceImpl implements RequisicaoService{
 
         updateRequisicao.setTituloRequisicao(dto.getTituloRequisicao());
         updateRequisicao.setDescricaoRequisicao(dto.getDescricaoRequisicao());
-        updateRequisicao.setStatusRequisicao(dto.getStatusRequisicao());
 
+        requisicaoRepository.save(updateRequisicao);
 
         return updateRequisicao;
     }
