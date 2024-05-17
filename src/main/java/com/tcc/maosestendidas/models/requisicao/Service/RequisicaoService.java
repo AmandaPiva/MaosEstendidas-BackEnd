@@ -1,7 +1,7 @@
 package com.tcc.maosestendidas.models.requisicao.Service;
 
 import com.tcc.maosestendidas.models.requisicao.DTO.RequisicaoDTO;
-import com.tcc.maosestendidas.models.requisicao.DTO.VinculaDoacaoNaRequisicaoDTO;
+import com.tcc.maosestendidas.models.doacao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import com.tcc.maosestendidas.models.requisicao.Entity.StatusRequisicao;
 
@@ -18,7 +18,6 @@ public interface RequisicaoService {
 
     Requisicao criaRequisicao(RequisicaoDTO dto);
 
-    Requisicao vinculaDoacaoNaRequisicao(VinculaDoacaoNaRequisicaoDTO dto);
 
     Requisicao updateStatusRequisicao(String idRequisicao, StatusRequisicao novoStatus);
 

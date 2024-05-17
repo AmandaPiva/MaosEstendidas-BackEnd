@@ -24,11 +24,6 @@ public class Doacao {
    @JoinColumn(name = "idRequisicao")
    private Requisicao requisicao;
 
-    private String descricao;
-
     private LocalDateTime dataDoacao;
-
-    @Enumerated(EnumType.STRING)
-    private StatusDoacao statusDoacao;
 
 }

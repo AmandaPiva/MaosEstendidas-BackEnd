@@ -1,13 +1,12 @@
 package com.tcc.maosestendidas.models.requisicao.Controller;
 
 import com.tcc.maosestendidas.models.requisicao.DTO.RequisicaoDTO;
-import com.tcc.maosestendidas.models.requisicao.DTO.VinculaDoacaoNaRequisicaoDTO;
+import com.tcc.maosestendidas.models.doacao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import com.tcc.maosestendidas.models.requisicao.Entity.StatusRequisicao;
 import com.tcc.maosestendidas.models.requisicao.Service.RequisicaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,10 +45,7 @@ public class RequisicaoController {
         return new ResponseEntity<Requisicao>(requisicaoService.criaRequisicao(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/vinculaDoacaoARequisicao")
-    public ResponseEntity<?> vinculaDoacaoARequisicao(@RequestBody VinculaDoacaoNaRequisicaoDTO dto){
-        return new ResponseEntity<Requisicao>(requisicaoService.vinculaDoacaoNaRequisicao(dto), HttpStatus.OK);
-    }
+
 
     @PatchMapping("/mudarStatusRequisicao/{id}/{statusRequisicao}")
     public ResponseEntity<?> atualizarStatusRequisicao(@PathVariable("id") String id, @PathVariable String statusRequisicao){

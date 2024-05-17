@@ -1,9 +1,11 @@
 package com.tcc.maosestendidas.models.doacao.Controller;
 
 import com.tcc.maosestendidas.models.doacao.DTO.DoacaoDTO;
+import com.tcc.maosestendidas.models.doacao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.doacao.Service.DoacaoService;
 import com.tcc.maosestendidas.models.doacao.entity.Doacao;
 import com.tcc.maosestendidas.models.doacao.entity.StatusDoacao;
+import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,32 +34,20 @@ public class DoacaoController {
         return new ResponseEntity<List<Doacao>>(doacaoService.buscarDoacaoPelaPessoa(idPessoa), HttpStatus.OK);
     }
 
-    @GetMapping("/buscaDoacaoPeloStatus/{statusDoacao}")
-    public List<Doacao> buscarDoacaoPeloStatus(@PathVariable String statusDoacao){
-        StatusDoacao status = StatusDoacao.valueOf(statusDoacao.toUpperCase());
-        return doacaoService.buscarDoacaoPeloStatus(status);
-    }
-
-    @PatchMapping("/mudarStatusDoacao/{id}/{statusDoacao}")
-    public ResponseEntity<?> atualizarStatusDoacao(@PathVariable("id") String id, @PathVariable String statusDoacao){
-        try {
-            StatusDoacao novoStatus = StatusDoacao.valueOf(statusDoacao.toUpperCase());
-            Doacao doacaoAtualizada = doacaoService.updateStatusDoacao(id, novoStatus);
-            return new ResponseEntity<>(doacaoAtualizada, HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("Status de doação inválido", HttpStatus.BAD_REQUEST);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
-    }
+//    @GetMapping("/buscaDoacaoPeloStatus/{statusDoacao}")
+//    public List<Doacao> buscarDoacaoPeloStatus(@PathVariable String statusDoacao){
+//        StatusDoacao status = StatusDoacao.valueOf(statusDoacao.toUpperCase());
+//        return doacaoService.buscarDoacaoPeloStatus(status);
+//    }
 
     @PostMapping
     public ResponseEntity<?> criaDoacao(@RequestBody DoacaoDTO dto){
         return new ResponseEntity<Doacao>(doacaoService.criaDoacao(dto), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> updateDoacao(@RequestBody DoacaoDTO dto, @PathVariable("id") String id){
-        return new ResponseEntity<Doacao>(doacaoService.updateDoacao(dto, id), HttpStatus.OK);
+    @PutMapping("/vinculaDoacaoARequisicao")
+    public ResponseEntity<?> vinculaDoacaoARequisicao(@RequestBody VinculaDoacaoNaRequisicaoDTO dto){
+        return new ResponseEntity<Requisicao>(doacaoService.vinculaDoacaoNaRequisicao(dto), HttpStatus.OK);
     }
+
 }

@@ -5,12 +5,11 @@ import com.tcc.maosestendidas.models.doacao.entity.DoacaoRepository;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
 import com.tcc.maosestendidas.models.requisicao.DTO.RequisicaoDTO;
-import com.tcc.maosestendidas.models.requisicao.DTO.VinculaDoacaoNaRequisicaoDTO;
+import com.tcc.maosestendidas.models.doacao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
 import com.tcc.maosestendidas.models.requisicao.Entity.RequisicaoRepository;
 import com.tcc.maosestendidas.models.requisicao.Entity.StatusRequisicao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -83,22 +82,7 @@ public class RequisicaoServiceImpl implements RequisicaoService{
         return requisicao;
     }
 
-    @Override
-    public Requisicao vinculaDoacaoNaRequisicao(VinculaDoacaoNaRequisicaoDTO dto){
-        Optional<Doacao> doacao = doacaoRepository.findById(dto.getIdDoacao());
-        if(doacao.isEmpty()) throw new RuntimeException("Doação ainda não criada");
 
-        Optional<Requisicao> requisicao = requisicaoRepository.findById(dto.getIdRequisicao());
-        if(requisicao.isEmpty()) throw new RuntimeException("Requisição não encontrada pelo id informado");
-
-        Requisicao requisicao1 = requisicao.get();
-
-        requisicao1.getDoacoes().add(doacao.get());
-
-        requisicaoRepository.save(requisicao1);
-
-        return requisicao1;
-    }
 
     @Override
     public Requisicao updateStatusRequisicao(String idRequisicao, StatusRequisicao novoStatus){

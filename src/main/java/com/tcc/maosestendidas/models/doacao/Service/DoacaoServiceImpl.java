@@ -1,11 +1,14 @@
 package com.tcc.maosestendidas.models.doacao.Service;
 
 import com.tcc.maosestendidas.models.doacao.DTO.DoacaoDTO;
+import com.tcc.maosestendidas.models.doacao.DTO.VinculaDoacaoNaRequisicaoDTO;
 import com.tcc.maosestendidas.models.doacao.entity.Doacao;
 import com.tcc.maosestendidas.models.doacao.entity.DoacaoRepository;
 import com.tcc.maosestendidas.models.doacao.entity.StatusDoacao;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
+import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
+import com.tcc.maosestendidas.models.requisicao.Entity.RequisicaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,9 @@ public class DoacaoServiceImpl implements DoacaoService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private RequisicaoRepository requisicaoRepository;
 
     @Override
     public List<Doacao> listarDoacoes() {
@@ -44,11 +50,28 @@ public class DoacaoServiceImpl implements DoacaoService {
         return doacaoRepository.findByPessoaDoadora(pessoa.get());
     }
 
+//    @Override
+//    public List<Doacao> buscarDoacaoPeloStatus(StatusDoacao statusDoacao) {
+//        return doacaoRepository.findAll().stream()
+//                .filter(doacoes -> doacoes.getStatusDoacao() == statusDoacao)
+//                .collect(Collectors.toList());
+//    }
+
     @Override
-    public List<Doacao> buscarDoacaoPeloStatus(StatusDoacao statusDoacao) {
-        return doacaoRepository.findAll().stream()
-                .filter(doacoes -> doacoes.getStatusDoacao() == statusDoacao)
-                .collect(Collectors.toList());
+    public Requisicao vinculaDoacaoNaRequisicao(VinculaDoacaoNaRequisicaoDTO dto){
+        Optional<Doacao> doacao = doacaoRepository.findById(dto.getIdDoacao());
+        if(doacao.isEmpty()) throw new RuntimeException("Doação ainda não criada");
+
+        Optional<Requisicao> requisicao = requisicaoRepository.findById(dto.getIdRequisicao());
+        if(requisicao.isEmpty()) throw new RuntimeException("Requisição não encontrada pelo id informado");
+
+        Requisicao requisicao1 = requisicao.get();
+
+        requisicao1.getDoacoes().add(doacao.get());
+
+        requisicaoRepository.save(requisicao1);
+
+        return requisicao1;
     }
 
     @Override
@@ -65,39 +88,11 @@ public class DoacaoServiceImpl implements DoacaoService {
         Optional<Pessoa> pessoa = pessoaRepository.findById(dto.getPessoaDoadora());
         if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
 
-        doacao.setDescricao(dto.getDescricao());
         doacao.setPessoaDoadora(pessoa.get());
-        doacao.setStatusDoacao(dto.getStatusDoacao());
         doacao.setDataDoacao(LocalDateTime.now());
 
         return doacao;
 
     }
 
-    @Override
-    public Doacao updateStatusDoacao(String idDoacao, StatusDoacao novoStatus) {
-        Optional<Doacao> doacaoOptional = doacaoRepository.findById(idDoacao);
-        if (doacaoOptional.isEmpty()) {
-            throw new RuntimeException("Doação não encontrada pelo id informado");
-        }
-
-        Doacao doacao = doacaoOptional.get();
-        doacao.setStatusDoacao(novoStatus);
-        doacao.setDataDoacao(LocalDateTime.now());
-
-        return doacaoRepository.save(doacao);
-    }
-
-    @Override
-    public Doacao updateDoacao(DoacaoDTO dto, String idDoacao) {
-        Optional<Doacao> doacao = doacaoRepository.findById(idDoacao);
-        if(doacao.isEmpty()) throw new RuntimeException("Doação não encontrada pelo id informado");
-
-        Doacao updateDoacao = doacao.get();
-
-        updateDoacao.setDescricao(dto.getDescricao());
-        updateDoacao.setStatusDoacao(dto.getStatusDoacao());
-
-        return updateDoacao;
-    }
 }

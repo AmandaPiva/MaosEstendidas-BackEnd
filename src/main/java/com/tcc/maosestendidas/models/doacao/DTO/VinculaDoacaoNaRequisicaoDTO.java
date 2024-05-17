@@ -1,4 +1,4 @@
-package com.tcc.maosestendidas.models.requisicao.DTO;
+package com.tcc.maosestendidas.models.doacao.DTO;
 
 import lombok.Data;
 

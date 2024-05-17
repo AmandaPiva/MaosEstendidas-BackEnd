@@ -113,8 +113,8 @@ public class PessoaServiceImpl implements PessoaService{
     }
 
     @Override
-    public List<Pessoa> listarPessoasPelaRole(String idPessoaRole) {
-       Optional<PessoaRole> pessoaRole = pessoaRoleRepository.findById(idPessoaRole);
+    public List<Pessoa> listarPessoasPelaRole(String rolePessoa) {
+       Optional<PessoaRole> pessoaRole = pessoaRoleRepository.findByRolePessoa(rolePessoa);
        if(pessoaRole.isEmpty()) throw new RuntimeException("Não foi encontrado pessoas com esta role");
 
         return pessoaRepository.findByRolePessoa(pessoaRole.get());
