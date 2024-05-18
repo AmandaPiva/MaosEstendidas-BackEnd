@@ -53,7 +53,8 @@ public class securityConfiguration {
                                 new AntPathRequestMatcher("/api/v1/pessoa/listaPessoasPelaRole/{rolePessoa}"),
                                 new AntPathRequestMatcher("/api/v1/requisicao/deleteRequisicao/{id}"),
                                 new AntPathRequestMatcher("/api/v1/requisicao"),
-
+                                new AntPathRequestMatcher("/api/v1/doacoes"),
+                                new AntPathRequestMatcher("/api/v1/requisicao/vinculaDoacaoARequisicao"),
 
                                 new AntPathRequestMatcher("/error")
                         ).permitAll().anyRequest().authenticated()

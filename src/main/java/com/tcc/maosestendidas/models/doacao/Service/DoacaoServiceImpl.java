@@ -85,10 +85,14 @@ public class DoacaoServiceImpl implements DoacaoService {
     private Doacao converteDtoParaDoacao(DoacaoDTO dto){
         Doacao doacao = new Doacao();
 
-        Optional<Pessoa> pessoa = pessoaRepository.findById(dto.getPessoaDoadora());
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
+        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(dto.getPessoaDoadora());
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo e-mail informado");
+
+        Optional<Requisicao> requisicao = requisicaoRepository.findById(dto.getRequisicao());
+        if(requisicao.isEmpty()) throw new RuntimeException("Requisição não encontrada pelo id informado");
 
         doacao.setPessoaDoadora(pessoa.get());
+        doacao.setRequisicao(requisicao.get());
         doacao.setDataDoacao(LocalDateTime.now());
 
         return doacao;

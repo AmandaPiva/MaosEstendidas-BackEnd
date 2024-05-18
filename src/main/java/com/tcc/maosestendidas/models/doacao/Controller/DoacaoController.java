@@ -45,7 +45,12 @@ public class DoacaoController {
         return new ResponseEntity<Doacao>(doacaoService.criaDoacao(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/vinculaDoacaoARequisicao")
+//    @PutMapping("/vinculaDoacaoARequisicao")
+//    public ResponseEntity<?> vinculaDoacaoARequisicao(@RequestBody VinculaDoacaoNaRequisicaoDTO dto){
+//        return new ResponseEntity<Requisicao>(doacaoService.vinculaDoacaoNaRequisicao(dto), HttpStatus.OK);
+//    }
+
+    @PostMapping("/vinculaDoacaoARequisicao")
     public ResponseEntity<?> vinculaDoacaoARequisicao(@RequestBody VinculaDoacaoNaRequisicaoDTO dto){
         return new ResponseEntity<Requisicao>(doacaoService.vinculaDoacaoNaRequisicao(dto), HttpStatus.OK);
     }
