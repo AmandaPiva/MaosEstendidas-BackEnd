@@ -54,7 +54,8 @@ public class securityConfiguration {
                                 new AntPathRequestMatcher("/api/v1/requisicao/deleteRequisicao/{id}"),
                                 new AntPathRequestMatcher("/api/v1/requisicao"),
                                 new AntPathRequestMatcher("/api/v1/doacoes"),
-                                new AntPathRequestMatcher("/api/v1/requisicao/vinculaDoacaoARequisicao"),
+                                new AntPathRequestMatcher("/api/v1/requisicao/mudarStatusRequisicao/{id}/{statusRequisicao}"),
+                                new AntPathRequestMatcher("/api/v1/email/send-password"),
 
                                 new AntPathRequestMatcher("/error")
                         ).permitAll().anyRequest().authenticated()
