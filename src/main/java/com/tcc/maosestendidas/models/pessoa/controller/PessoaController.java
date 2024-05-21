@@ -49,6 +49,12 @@ public class PessoaController {
     }
 
 
+    @PatchMapping("/updateSenha/{email}")
+    public ResponseEntity<?> updateSenhaPessoa(@RequestBody PessoaDTO dto, @PathVariable("email") String email){
+        return new ResponseEntity<Pessoa>(pessoaService.updateSenha(dto, email), HttpStatus.OK);
+    }
+
+
 
 
 }

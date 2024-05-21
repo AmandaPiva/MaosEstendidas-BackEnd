@@ -95,6 +95,8 @@ public class PessoaServiceImpl implements PessoaService{
         return  passwordEncoder.encode(senha);
     }
 
+
+
     @Override
     public Pessoa updatePessoa(PessoaDTO dto, String idPessoa) {
         Optional<Pessoa> pessoa = pessoaRepository.findById(idPessoa);
@@ -110,6 +112,20 @@ public class PessoaServiceImpl implements PessoaService{
         pessoaRepository.save(updatePessoa);
 
         return updatePessoa;
+    }
+
+    @Override
+    public Pessoa updateSenha(PessoaDTO dto, String email) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(email);
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
+
+        Pessoa updateSenhaPessoa = pessoa.get();
+
+        updateSenhaPessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
+
+        pessoaRepository.save(updateSenhaPessoa);
+
+        return updateSenhaPessoa;
     }
 
     @Override

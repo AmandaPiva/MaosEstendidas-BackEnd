@@ -25,6 +25,8 @@ public interface PessoaService {
 
     Pessoa updatePessoa(PessoaDTO dto, String idPessoa);
 
+    Pessoa updateSenha(PessoaDTO dto, String email);
+
     List<Pessoa> listarPessoasPelaRole(String rolePessoa);
 
     Boolean comparaSenhas(String senhaCriptografada, String senha);
