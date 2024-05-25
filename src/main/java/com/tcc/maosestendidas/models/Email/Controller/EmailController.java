@@ -1,6 +1,9 @@
 package com.tcc.maosestendidas.models.Email.Controller;
 
 import com.tcc.maosestendidas.models.Email.DTO.EmailDTO;
+import com.tcc.maosestendidas.models.pessoa.DTO.PessoaDTO;
+import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
+import com.tcc.maosestendidas.models.pessoa.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,9 +18,18 @@ public class EmailController {
     @Autowired
     private JavaMailSender mailSender;
 
+    @Autowired
+    private PessoaService pessoaService;
+
     @PostMapping("/send-password")
-    public String sendPassword(@RequestBody EmailDTO emailDTO) {
+    public String sendPassword(@RequestBody EmailDTO emailDTO, String senha ) {
         try {
+            try{
+                pessoaService.updateSenha(emailDTO.getNewPassword(), emailDTO.getEmail());
+            } catch(Exception e){
+                return "Pessoa não encontrada pelo email";
+            }
+
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("thaisxavierpires@gmail.com");
             message.setTo(emailDTO.getEmail());

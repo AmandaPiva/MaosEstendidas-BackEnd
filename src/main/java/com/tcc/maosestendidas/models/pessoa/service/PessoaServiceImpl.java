@@ -114,19 +114,34 @@ public class PessoaServiceImpl implements PessoaService{
         return updatePessoa;
     }
 
+//    @Override
+//    public Pessoa updateSenha(PessoaDTO dto, String email) {
+//        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(email);
+//        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
+//
+//        Pessoa updateSenhaPessoa = pessoa.get();
+//
+//        updateSenhaPessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
+//
+//        pessoaRepository.save(updateSenhaPessoa);
+//
+//        return updateSenhaPessoa;
+//    }
+
     @Override
-    public Pessoa updateSenha(PessoaDTO dto, String email) {
+    public Pessoa updateSenha(String senha, String email) {
         Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(email);
         if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
 
         Pessoa updateSenhaPessoa = pessoa.get();
 
-        updateSenhaPessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
+        updateSenhaPessoa.setSenhaPessoa(geraSenhaHash(senha));
 
         pessoaRepository.save(updateSenhaPessoa);
 
         return updateSenhaPessoa;
     }
+
 
     @Override
     public List<Pessoa> listarPessoasPelaRole(String rolePessoa) {
