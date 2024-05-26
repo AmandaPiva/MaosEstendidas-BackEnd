@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Data
 public class ChatDTO {
     private String pessoaRemetente;
+    private String pessoaDestinataria;
     private String mensagem;
     private String requisicao;
     private LocalDateTime timestamp;

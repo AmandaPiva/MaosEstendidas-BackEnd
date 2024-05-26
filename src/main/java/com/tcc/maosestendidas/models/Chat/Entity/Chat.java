@@ -15,8 +15,12 @@ public class Chat {
     private String idChat;
 
     @ManyToOne
-    @JoinColumn(name = "idPessoa")
+    @JoinColumn(name = "idPessoaRementente")
     private Pessoa pessoaRemetente;
+
+    @ManyToOne
+    @JoinColumn(name = "idPessoaDestinataria")
+    private Pessoa pessoaDestinataria;
 
     @ManyToOne
     @JoinColumn(name = "idRequisicao")

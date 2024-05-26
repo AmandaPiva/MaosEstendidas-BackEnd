@@ -9,5 +9,7 @@ import java.util.Optional;
 public interface ChatRepository extends JpaRepository<Chat, String> {
     Optional<Chat> findById(String idMensagem);
 
-    List<Chat> findByPessoaRemetente(Pessoa pessoaRemetente);
+    List<Chat> findByPessoaRemetente(Pessoa pessoaRementente);
+
+    List<Chat> findByPessoaDestinataria(Pessoa pessoaDestinataria);
 }

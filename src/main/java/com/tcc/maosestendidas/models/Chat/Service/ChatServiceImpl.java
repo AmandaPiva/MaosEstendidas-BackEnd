@@ -5,6 +5,8 @@ import com.tcc.maosestendidas.models.Chat.Entity.Chat;
 import com.tcc.maosestendidas.models.Chat.Entity.ChatRepository;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.entity.PessoaRepository;
+import com.tcc.maosestendidas.models.requisicao.Entity.Requisicao;
+import com.tcc.maosestendidas.models.requisicao.Entity.RequisicaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ public class ChatServiceImpl implements ChatService{
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private RequisicaoRepository requisicaoRepository;
     @Override
     public List<Chat> listarMensagens() {
         return chatRepository.findAll();
@@ -53,11 +57,15 @@ public class ChatServiceImpl implements ChatService{
     private Chat converteDtoParaMensagem(ChatDTO dto){
         Chat chat = new Chat();
 
-        Optional<Pessoa> pessoa = pessoaRepository.findById(dto.getPessoaRemetente());
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
+        Optional<Pessoa> pessoaRemetente = pessoaRepository.findByEmailPessoa(dto.getPessoaRemetente());
+        if(pessoaRemetente.isEmpty()) throw new RuntimeException("Pessoa remetente não encontrada pelo email informado");
+
+        Optional<Pessoa> pessoaDestinataria = pessoaRepository.findByEmailPessoa(dto.getPessoaDestinataria());
+        if(pessoaDestinataria.isEmpty()) throw new RuntimeException("Pessoa destinataria não encontrada pelo email informado");
 
         chat.setMensagem(dto.getMensagem());
-        chat.setPessoaRemetente(pessoa.get());
+        chat.setPessoaRemetente(pessoaRemetente.get());
+        chat.setPessoaDestinataria(pessoaDestinataria.get());
         chat.setTimestamp(LocalDateTime.now());
         return chat;
     }
