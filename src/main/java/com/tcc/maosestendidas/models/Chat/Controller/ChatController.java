@@ -28,9 +28,14 @@ public class ChatController {
         return new ResponseEntity<Chat>(chatService.buscarMensagemPeloId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/buscaMensagemPeloRementente/{idPessoa}")
-    public ResponseEntity<?> buscaMensagemPeloRementente(@PathVariable("idPessoa") String idPessoa){
-        return new ResponseEntity<List<Chat>>(chatService.buscarMensagemPelaPessoa(idPessoa), HttpStatus.OK);
+    @GetMapping("/buscaMensagemPeloRementente/{emailPessoa}")
+    public ResponseEntity<?> buscaMensagemPeloRementente(@PathVariable("emailPessoa") String emailPessoa){
+        return new ResponseEntity<List<Chat>>(chatService.buscarMensagemPelaPessoa(emailPessoa), HttpStatus.OK);
+    }
+
+    @GetMapping("/buscaMensagemPeloDestinatarioERemetente/{emailPessoaRemetente}/{emailPessoaDestinataria}")
+    public ResponseEntity<?> buscaMensagem(@PathVariable("emailPessoaRemetente") String emailPessoaRemetente, @PathVariable("emailPessoaDestinataria") String emailPessoaDestinataria){
+        return new ResponseEntity<List<Chat>>(chatService.buscarMensagens(emailPessoaRemetente, emailPessoaDestinataria), HttpStatus.OK);
     }
 
     @PostMapping

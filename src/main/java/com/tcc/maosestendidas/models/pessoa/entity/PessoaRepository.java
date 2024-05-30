@@ -15,6 +15,8 @@ public interface PessoaRepository extends JpaRepository<Pessoa, String> {
 
     Optional<Pessoa> findByDocumentoPessoa(String documentoPessoa);
 
+    Optional<Pessoa> findByCelular(String celularPessoa);
+
     List<Pessoa> findByRolePessoa(PessoaRole pessoaRole);
 
     Optional<Pessoa> findBySenhaPessoa(String senha);

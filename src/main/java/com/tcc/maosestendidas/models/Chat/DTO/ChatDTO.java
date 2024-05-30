@@ -11,6 +11,7 @@ public class ChatDTO {
     private String pessoaDestinataria;
     private String mensagem;
     private String requisicao;
+
     private LocalDateTime timestamp;
 
 

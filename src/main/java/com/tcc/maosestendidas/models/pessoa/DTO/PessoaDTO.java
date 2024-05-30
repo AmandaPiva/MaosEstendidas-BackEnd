@@ -10,6 +10,8 @@ public class PessoaDTO {
     private String emailPessoa;
     private String documentoPessoa;
     private String senhaPessoa;
+    private String celular;
+
 
     private String rolePessoa;
 

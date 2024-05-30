@@ -28,6 +28,4 @@ public class Chat {
 
     private String mensagem;
     private LocalDateTime timestamp;
-
-
 }

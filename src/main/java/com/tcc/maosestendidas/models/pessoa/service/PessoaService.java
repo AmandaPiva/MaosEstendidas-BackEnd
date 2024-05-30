@@ -19,6 +19,8 @@ public interface PessoaService {
 
     Pessoa buscaPessoaPeloDocumento(String documentoPessoa);
 
+    Pessoa buscaPessoaPeloCelular(String celular);
+
     Pessoa criaPessoa(PessoaDTO dto);
 
     Pessoa criaPessoa(Pessoa pessoa);

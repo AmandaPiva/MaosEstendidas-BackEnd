@@ -39,11 +39,23 @@ public class ChatServiceImpl implements ChatService{
     }
 
     @Override
-    public List<Chat> buscarMensagemPelaPessoa(String idPessoa) {
-        Optional<Pessoa> pessoa = pessoaRepository.findById(idPessoa);
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
+    public List<Chat> buscarMensagemPelaPessoa(String emailPessoa) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(emailPessoa);
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
 
         return chatRepository.findByPessoaRemetente(pessoa.get());
+    }
+
+    @Override
+    public List<Chat> buscarMensagens(String emailPessoaRemetente, String emailPessoaDestinataria) {
+        Optional<Pessoa> pessoaRemetente = pessoaRepository.findByEmailPessoa(emailPessoaRemetente);
+        if(pessoaRemetente.isEmpty()) throw new RuntimeException("Pessoa remetente não encontrada pelo email informado");
+
+        Optional<Pessoa> pessoaDestinataria = pessoaRepository.findByEmailPessoa(emailPessoaDestinataria);
+        if(pessoaDestinataria.isEmpty()) throw new RuntimeException("Pessoa destinataria não encontrada pelo email informado");
+
+
+        return chatRepository.findByRemetenteAndDestinataria(pessoaRemetente.get(), pessoaDestinataria.get());
     }
 
     @Override

@@ -58,6 +58,14 @@ public class PessoaServiceImpl implements PessoaService{
     }
 
     @Override
+    public Pessoa buscaPessoaPeloCelular(String celular) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByCelular(celular);
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo celular informado");
+
+        return pessoa.get();
+    }
+
+    @Override
     @Transactional
     public Pessoa criaPessoa(PessoaDTO dto) {
         Pessoa pessoa = converteDtoParaPessoa(dto);
@@ -82,6 +90,7 @@ public class PessoaServiceImpl implements PessoaService{
         pessoa.setNomePessoa(dto.getNomePessoa());
         pessoa.setEmailPessoa(dto.getEmailPessoa());
         pessoa.setDocumentoPessoa(dto.getDocumentoPessoa());
+        pessoa.setCelular(dto.getCelular());
         pessoa.setRolePessoa(pessoaRole.get());
         pessoa.setSenhaPessoa(geraSenhaHash(dto.getSenhaPessoa()));
         pessoa.setEndereco(endereco.get());
@@ -106,6 +115,7 @@ public class PessoaServiceImpl implements PessoaService{
 
         updatePessoa.setDocumentoPessoa(dto.getDocumentoPessoa());
         updatePessoa.setEmailPessoa(dto.getEmailPessoa());
+        updatePessoa.setCelular(dto.getCelular());
         updatePessoa.setNomePessoa(dto.getNomePessoa());
         updatePessoa.setDataNascimentoPessoa(dto.getDataNascimentoPessoa());
 

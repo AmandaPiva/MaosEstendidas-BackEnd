@@ -43,9 +43,9 @@ public class DoacaoServiceImpl implements DoacaoService {
     }
 
     @Override
-    public List<Doacao> buscarDoacaoPelaPessoa(String idPessoa) {
-        Optional<Pessoa> pessoa = pessoaRepository.findById(idPessoa);
-        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo id informado");
+    public List<Doacao> buscarDoacaoPelaPessoa(String emailPessoa) {
+        Optional<Pessoa> pessoa = pessoaRepository.findByEmailPessoa(emailPessoa);
+        if(pessoa.isEmpty()) throw new RuntimeException("Pessoa não encontrada pelo email informado");
 
         return doacaoRepository.findByPessoaDoadora(pessoa.get());
     }

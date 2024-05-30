@@ -13,7 +13,7 @@ public interface DoacaoService {
 
     Doacao buscarDoacaoPeloId(String idDoacao);
 
-    List<Doacao> buscarDoacaoPelaPessoa(String idPessoa);
+    List<Doacao> buscarDoacaoPelaPessoa(String emailPessoa);
 
 //    List<Doacao> buscarDoacaoPeloStatus(StatusDoacao statusDoacao);
 

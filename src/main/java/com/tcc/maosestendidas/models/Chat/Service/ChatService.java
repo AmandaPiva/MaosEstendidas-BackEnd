@@ -11,7 +11,9 @@ public interface ChatService {
 
     Chat buscarMensagemPeloId(String idMensagem);
 
-    List<Chat> buscarMensagemPelaPessoa(String idPessoa);
+    List<Chat> buscarMensagemPelaPessoa(String emailPessoa);
+
+    List<Chat> buscarMensagens(String emailPessoaRemetente, String emailPessoaDestinataria);
 
     //metodo de enviar mensagem
     Chat enviarMensagem(ChatDTO dto);

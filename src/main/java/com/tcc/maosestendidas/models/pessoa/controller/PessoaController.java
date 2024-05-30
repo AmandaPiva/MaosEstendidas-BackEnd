@@ -38,6 +38,11 @@ public class PessoaController {
         return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloDocumento(documentoPessoa), HttpStatus.OK);
     }
 
+    @GetMapping("/buscarPeloCelular/{celularPessoa}")
+    public ResponseEntity<?> buscarPessoaPeloCelular(@PathVariable("celularPessoa") String celularPessoa){
+        return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloCelular(celularPessoa), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> criaPessoa(@RequestBody PessoaDTO dto){
         return new ResponseEntity<Pessoa>(pessoaService.criaPessoa(dto), HttpStatus.CREATED);

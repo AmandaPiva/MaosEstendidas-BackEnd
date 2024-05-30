@@ -28,6 +28,8 @@ public class Pessoa implements UserDetails {
 
     private String senhaPessoa;
 
+    private String celular;
+
     private String documentoPessoa;
 
 

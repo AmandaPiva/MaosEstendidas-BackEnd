@@ -29,9 +29,9 @@ public class DoacaoController {
         return new ResponseEntity<Doacao>(doacaoService.buscarDoacaoPeloId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/buscaDoacoesPelaPessoa/{idPessoa}")
-    public ResponseEntity<?> buscaDoacaoPelaPessoa(@PathVariable("idPessoa") String idPessoa){
-        return new ResponseEntity<List<Doacao>>(doacaoService.buscarDoacaoPelaPessoa(idPessoa), HttpStatus.OK);
+    @GetMapping("/buscaDoacoesPelaPessoa/{emailPessoa}")
+    public ResponseEntity<?> buscaDoacaoPelaPessoa(@PathVariable("emailPessoa") String emailPessoa){
+        return new ResponseEntity<List<Doacao>>(doacaoService.buscarDoacaoPelaPessoa(emailPessoa), HttpStatus.OK);
     }
 
 //    @GetMapping("/buscaDoacaoPeloStatus/{statusDoacao}")
