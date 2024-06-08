@@ -32,6 +32,10 @@ public class Pessoa implements UserDetails {
 
     private String documentoPessoa;
 
+    //criando o atributo para guardar a imagem
+    @Lob
+    private byte[] imagemPerfil;
+
 
     private LocalDate dataNascimentoPessoa;
 

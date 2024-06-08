@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -41,6 +43,16 @@ public class PessoaController {
     @GetMapping("/buscarPeloCelular/{celularPessoa}")
     public ResponseEntity<?> buscarPessoaPeloCelular(@PathVariable("celularPessoa") String celularPessoa){
         return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloCelular(celularPessoa), HttpStatus.OK);
+    }
+
+    @PostMapping("/uploadImagem/{idPessoa}")
+    public ResponseEntity<Pessoa> uploadImagem(@PathVariable String idPessoa, @RequestParam("imagem") MultipartFile imagem) {
+        try {
+            Pessoa pessoa = pessoaService.uploadImagem(idPessoa, imagem);
+            return new ResponseEntity<>(pessoa, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping

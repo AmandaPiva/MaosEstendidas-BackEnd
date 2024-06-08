@@ -2,10 +2,10 @@ package com.tcc.maosestendidas.models.pessoa.service;
 
 import com.tcc.maosestendidas.models.pessoa.DTO.PessoaDTO;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
-import com.tcc.maosestendidas.models.pessoa.entity.PessoaRole;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +16,7 @@ public interface PessoaService {
 
     Optional<Pessoa> buscaPessoaPeloEmailOptional(String email);
 
+    Pessoa uploadImagem(String idPessoa, MultipartFile imagem) throws IOException;
 
     Pessoa buscaPessoaPeloDocumento(String documentoPessoa);
 
