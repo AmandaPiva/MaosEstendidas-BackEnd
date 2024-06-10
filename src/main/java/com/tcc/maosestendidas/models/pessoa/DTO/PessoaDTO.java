@@ -11,7 +11,7 @@ public class PessoaDTO {
     private String documentoPessoa;
     private String senhaPessoa;
     private String celular;
-
+    private byte[] imagem;
 
     private String rolePessoa;
 

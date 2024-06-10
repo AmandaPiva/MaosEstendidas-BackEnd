@@ -34,7 +34,7 @@ public class Pessoa implements UserDetails {
 
     //criando o atributo para guardar a imagem
     @Lob
-    private byte[] imagemPerfil;
+    private byte[] imagem;
 
 
     private LocalDate dataNascimentoPessoa;

@@ -3,6 +3,7 @@ package com.tcc.maosestendidas.models.pessoa.controller;
 import com.tcc.maosestendidas.models.pessoa.DTO.PessoaDTO;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.service.PessoaService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+import static java.rmi.server.LogStream.log;
+
 @RestController
 @RequestMapping("/api/v1/pessoa")
-
+@Slf4j
 public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
@@ -45,15 +48,19 @@ public class PessoaController {
         return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloCelular(celularPessoa), HttpStatus.OK);
     }
 
-    @PostMapping("/uploadImagem/{idPessoa}")
-    public ResponseEntity<Pessoa> uploadImagem(@PathVariable String idPessoa, @RequestParam("imagem") MultipartFile imagem) {
+    @PostMapping("/{id}/upload-imagem")
+    public ResponseEntity<String> uploadImagem(@PathVariable("id") String idPessoa,
+                                               @RequestParam("imagem") MultipartFile imagem) {
         try {
             Pessoa pessoa = pessoaService.uploadImagem(idPessoa, imagem);
-            return new ResponseEntity<>(pessoa, HttpStatus.OK);
+            return ResponseEntity.ok("Imagem carregada com sucesso para a pessoa: " + pessoa.getIdPessoa());
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a imagem: " + e.getMessage());
         }
     }
+
 
     @PostMapping
     public ResponseEntity<?> criaPessoa(@RequestBody PessoaDTO dto){
