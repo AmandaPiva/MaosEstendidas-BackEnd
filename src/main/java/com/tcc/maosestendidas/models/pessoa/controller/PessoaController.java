@@ -1,11 +1,14 @@
 package com.tcc.maosestendidas.models.pessoa.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tcc.maosestendidas.models.pessoa.DTO.PessoaDTO;
 import com.tcc.maosestendidas.models.pessoa.entity.Pessoa;
 import com.tcc.maosestendidas.models.pessoa.service.PessoaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,19 +51,33 @@ public class PessoaController {
         return new ResponseEntity<Pessoa>(pessoaService.buscaPessoaPeloCelular(celularPessoa), HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/upload-imagem")
-    public ResponseEntity<String> uploadImagem(@PathVariable("id") String idPessoa,
-                                               @RequestParam("imagem") MultipartFile imagem) {
-        try {
-            Pessoa pessoa = pessoaService.uploadImagem(idPessoa, imagem);
-            return ResponseEntity.ok("Imagem carregada com sucesso para a pessoa: " + pessoa.getIdPessoa());
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a imagem: " + e.getMessage());
-        }
+//    @PostMapping("/{id}/upload-imagem")
+//    public ResponseEntity<String> uploadImagem(@PathVariable("id") String idPessoa,
+//                                               @RequestParam("imagem") MultipartFile imagem) {
+//        try {
+//            Pessoa pessoa = pessoaService.uploadImagem(idPessoa, imagem);
+//            return ResponseEntity.ok("Imagem carregada com sucesso para a pessoa: " + pessoa.getIdPessoa());
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//        } catch (IOException e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao processar a imagem: " + e.getMessage());
+//        }
+//    }
+
+    @GetMapping("/imagem/{idPessoa}")
+    public ResponseEntity<byte[]> getImagem(@PathVariable String idPessoa) {
+        byte[] imagem = pessoaService.getImagemByIdPessoa(idPessoa);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG); // ou o tipo de mídia apropriado para sua imagem
+        return new ResponseEntity<>(imagem, headers, HttpStatus.OK);
     }
 
+//    @PostMapping
+//    public ResponseEntity<?> criaPessoa(@RequestParam("pessoaDto") String pessoa, @RequestParam("imagem") MultipartFile imagem) throws IOException {
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        PessoaDTO pessoaDto = objectMapper.readValue(pessoa, PessoaDTO.class);
+//        return new ResponseEntity<Pessoa>(pessoaService.criaPessoa(pessoaDto, imagem), HttpStatus.CREATED);
+//    }
 
     @PostMapping
     public ResponseEntity<?> criaPessoa(@RequestBody PessoaDTO dto){

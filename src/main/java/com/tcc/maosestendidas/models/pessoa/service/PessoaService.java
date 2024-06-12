@@ -16,7 +16,9 @@ public interface PessoaService {
 
     Optional<Pessoa> buscaPessoaPeloEmailOptional(String email);
 
-    Pessoa uploadImagem(String idPessoa, MultipartFile imagem) throws IOException;
+//    Pessoa uploadImagem(String idPessoa, MultipartFile imagem) throws IOException;
+
+    byte[] getImagemByIdPessoa(String idPessoa);
 
     Pessoa buscaPessoaPeloDocumento(String documentoPessoa);
 

@@ -62,7 +62,7 @@ public class securityConfiguration {
 
                                 new AntPathRequestMatcher("/api/v1/doacoes/buscaDoacoesPelaPessoa/{emailPessoa}"),
                                 new AntPathRequestMatcher("/api/v1/pessoa/{id}/upload-imagem"),
-
+                                new AntPathRequestMatcher("/api/v1/pessoa/imagem/{idPessoa}"),
 
 
                                 new AntPathRequestMatcher("/error")
