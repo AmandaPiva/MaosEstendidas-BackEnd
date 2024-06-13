@@ -56,7 +56,7 @@ public class securityConfiguration {
                                 new AntPathRequestMatcher("/api/v1/doacoes"),
                                 new AntPathRequestMatcher("/api/v1/requisicao/mudarStatusRequisicao/{id}/{statusRequisicao}"),
                                 new AntPathRequestMatcher("/api/v1/email/send-password"),
-                                new AntPathRequestMatcher("/api/v1/pessoa/updateSenha/{email}"),
+                                new AntPathRequestMatcher("/api/v1/pessoa/updateSenhaManual/{idPessoa}"),
                                 new AntPathRequestMatcher("/api/v1/pessoa/buscaPeloEmail/{email}"),
                                 new AntPathRequestMatcher("/api/v1/pessoa/{id}"),
 

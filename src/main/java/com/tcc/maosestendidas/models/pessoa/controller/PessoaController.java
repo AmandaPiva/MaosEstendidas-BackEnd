@@ -90,10 +90,10 @@ public class PessoaController {
     }
 
 
-//    @PatchMapping("/updateSenha/{email}")
-//    public ResponseEntity<?> updateSenhaPessoa(@RequestBody S, @PathVariable("email") String email){
-//        return new ResponseEntity<Pessoa>(pessoaService.updateSenha(dto, email), HttpStatus.OK);
-//    }
+    @PatchMapping("/updateSenhaManual/{idPessoa}")
+    public ResponseEntity<?> updateSenhaPessoa(@RequestBody PessoaDTO dto, @PathVariable("idPessoa") String idPessoa){
+        return new ResponseEntity<Pessoa>(pessoaService.updateSenhaManual(dto, idPessoa), HttpStatus.OK);
+    }
 
 
 
