@@ -34,7 +34,8 @@ public class EmailController {
             message.setFrom("thaisxavierpires@gmail.com");
             message.setTo(emailDTO.getEmail());
             message.setSubject("Sua nova senha");
-            message.setText("Sua nova senha é: " + emailDTO.getNewPassword());
+            message.setText("\nALTERAÇÃO DE SENHA\n" +
+                    "Sua nova senha é: " + emailDTO.getNewPassword());
             mailSender.send(message);
             return "Email enviado com sucesso!";
         } catch (Exception e) {
